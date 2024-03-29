@@ -119,6 +119,7 @@ namespace Pulumi.Konnect
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/csechrist/pulumi-konnect",
                 AdditionalSecretOutputs =
                 {
                     "clientSecret",

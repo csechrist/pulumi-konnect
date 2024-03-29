@@ -23,6 +23,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "konnect"
+        "name": "konnect",
+        "server": "github://api.github.com/csechrist/pulumi-konnect"
     }
 }
