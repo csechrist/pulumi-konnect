@@ -10,6 +10,11 @@ export type AuthenticationSettings = import("./authenticationSettings").Authenti
 export const AuthenticationSettings: typeof import("./authenticationSettings").AuthenticationSettings = null as any;
 utilities.lazyLoad(exports, ["AuthenticationSettings"], () => require("./authenticationSettings"));
 
+export { CertificateArgs, CertificateState } from "./certificate";
+export type Certificate = import("./certificate").Certificate;
+export const Certificate: typeof import("./certificate").Certificate = null as any;
+utilities.lazyLoad(exports, ["Certificate"], () => require("./certificate"));
+
 export { ConsumerArgs, ConsumerState } from "./consumer";
 export type Consumer = import("./consumer").Consumer;
 export const Consumer: typeof import("./consumer").Consumer = null as any;
@@ -44,6 +49,11 @@ export { ControlPlaneArgs, ControlPlaneState } from "./controlPlane";
 export type ControlPlane = import("./controlPlane").ControlPlane;
 export const ControlPlane: typeof import("./controlPlane").ControlPlane = null as any;
 utilities.lazyLoad(exports, ["ControlPlane"], () => require("./controlPlane"));
+
+export { DpCertificateArgs, DpCertificateState } from "./dpCertificate";
+export type DpCertificate = import("./dpCertificate").DpCertificate;
+export const DpCertificate: typeof import("./dpCertificate").DpCertificate = null as any;
+utilities.lazyLoad(exports, ["DpCertificate"], () => require("./dpCertificate"));
 
 export { GetConsumerArgs, GetConsumerResult, GetConsumerOutputArgs } from "./getConsumer";
 export const getConsumer: typeof import("./getConsumer").getConsumer = null as any;
@@ -156,6 +166,8 @@ const _module = {
         switch (type) {
             case "konnect:index/authenticationSettings:AuthenticationSettings":
                 return new AuthenticationSettings(name, <any>undefined, { urn })
+            case "konnect:index/certificate:Certificate":
+                return new Certificate(name, <any>undefined, { urn })
             case "konnect:index/consumer:Consumer":
                 return new Consumer(name, <any>undefined, { urn })
             case "konnect:index/consumerACL:ConsumerACL":
@@ -170,6 +182,8 @@ const _module = {
                 return new ConsumerKey(name, <any>undefined, { urn })
             case "konnect:index/controlPlane:ControlPlane":
                 return new ControlPlane(name, <any>undefined, { urn })
+            case "konnect:index/dpCertificate:DpCertificate":
+                return new DpCertificate(name, <any>undefined, { urn })
             case "konnect:index/identityProvider:IdentityProvider":
                 return new IdentityProvider(name, <any>undefined, { urn })
             case "konnect:index/plugin:Plugin":
@@ -196,6 +210,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("konnect", "index/authenticationSettings", _module)
+pulumi.runtime.registerResourceModule("konnect", "index/certificate", _module)
 pulumi.runtime.registerResourceModule("konnect", "index/consumer", _module)
 pulumi.runtime.registerResourceModule("konnect", "index/consumerACL", _module)
 pulumi.runtime.registerResourceModule("konnect", "index/consumerBasic", _module)
@@ -203,6 +218,7 @@ pulumi.runtime.registerResourceModule("konnect", "index/consumerHMAC", _module)
 pulumi.runtime.registerResourceModule("konnect", "index/consumerJWT", _module)
 pulumi.runtime.registerResourceModule("konnect", "index/consumerKey", _module)
 pulumi.runtime.registerResourceModule("konnect", "index/controlPlane", _module)
+pulumi.runtime.registerResourceModule("konnect", "index/dpCertificate", _module)
 pulumi.runtime.registerResourceModule("konnect", "index/identityProvider", _module)
 pulumi.runtime.registerResourceModule("konnect", "index/plugin", _module)
 pulumi.runtime.registerResourceModule("konnect", "index/route", _module)

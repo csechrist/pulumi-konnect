@@ -28,7 +28,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 
 	// Replace this provider with the provider you are bridging.
-	konnect "github.com/scastria/terraform-provider-konnect/konnect"
+	konnect "github.com/csechrist/terraform-provider-konnect/konnect"
 
 	"github.com/csechrist/pulumi-konnect/provider/pkg/version"
 )
@@ -89,7 +89,7 @@ func Provider() tfbridge.ProviderInfo {
 		Repository: "https://github.com/csechrist/pulumi-konnect",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
-		GitHubOrg:    "scastria",
+		GitHubOrg:    "csechrist",
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 		Config:       map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
@@ -115,6 +115,8 @@ func Provider() tfbridge.ProviderInfo {
 			"konnect_consumer_hmac":           {Tok: tfbridge.MakeResource(mainPkg, mainMod, "ConsumerHMAC")},
 			"konnect_consumer_jwt":            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "ConsumerJWT")},
 			"konnect_plugin":                  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Plugin")},
+			"konnect_certificate":             {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Certificate")},
+			"konnect_dp_certificate":          {Tok: tfbridge.MakeResource(mainPkg, mainMod, "DpCertificate")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"konnect_control_plane": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getControlPlane")},

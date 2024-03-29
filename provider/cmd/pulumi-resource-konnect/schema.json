@@ -9,7 +9,7 @@
     ],
     "homepage": "https://www.pulumi.com",
     "license": "Apache-2.0",
-    "attribution": "This Pulumi package is based on the [`konnect` Terraform Provider](https://github.com/scastria/terraform-provider-konnect).",
+    "attribution": "This Pulumi package is based on the [`konnect` Terraform Provider](https://github.com/csechrist/terraform-provider-konnect).",
     "repository": "https://github.com/csechrist/pulumi-konnect",
     "publisher": "Cameron Sechrist",
     "meta": {
@@ -30,7 +30,7 @@
         "nodejs": {
             "packageName": "@camsechrist/pulumi-konnect",
             "packageDescription": "A Pulumi package for creating and managing Kong konnect cloud resources.",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/scastria/terraform-provider-konnect)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-konnect` repo](https://github.com/csechrist/pulumi-konnect/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-konnect` repo](https://github.com/scastria/terraform-provider-konnect/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/csechrist/terraform-provider-konnect)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-konnect` repo](https://github.com/csechrist/pulumi-konnect/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-konnect` repo](https://github.com/csechrist/terraform-provider-konnect/issues).",
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0"
             },
@@ -45,7 +45,7 @@
             "requires": {
                 "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             },
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/scastria/terraform-provider-konnect)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-konnect` repo](https://github.com/csechrist/pulumi-konnect/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-konnect` repo](https://github.com/scastria/terraform-provider-konnect/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/csechrist/terraform-provider-konnect)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-konnect` repo](https://github.com/csechrist/pulumi-konnect/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-konnect` repo](https://github.com/csechrist/terraform-provider-konnect/issues).",
             "compatibility": "tfbridge20",
             "pyproject": {}
         }
@@ -234,6 +234,75 @@
                     "oidcAuthEnabled": {
                         "type": "boolean",
                         "description": "**(Optional, Boolean)** Whether OIDC authentication is enabled.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/certificate:Certificate": {
+            "properties": {
+                "alternateCertificate": {
+                    "type": "string"
+                },
+                "alternateKey": {
+                    "type": "string"
+                },
+                "certificate": {
+                    "type": "string"
+                },
+                "controlPlaneId": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "certificate",
+                "controlPlaneId",
+                "key"
+            ],
+            "inputProperties": {
+                "alternateCertificate": {
+                    "type": "string"
+                },
+                "alternateKey": {
+                    "type": "string"
+                },
+                "certificate": {
+                    "type": "string"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "key": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "certificate",
+                "controlPlaneId",
+                "key"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Certificate resources.\n",
+                "properties": {
+                    "alternateCertificate": {
+                        "type": "string"
+                    },
+                    "alternateKey": {
+                        "type": "string"
+                    },
+                    "certificate": {
+                        "type": "string"
+                    },
+                    "controlPlaneId": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "key": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -776,6 +845,44 @@
                     "telemetryEndpoint": {
                         "type": "string",
                         "description": "**(String)** The telemetry endpoint URL of the control plane.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/dpCertificate:DpCertificate": {
+            "properties": {
+                "cert": {
+                    "type": "string"
+                },
+                "controlPlaneId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cert",
+                "controlPlaneId"
+            ],
+            "inputProperties": {
+                "cert": {
+                    "type": "string"
+                },
+                "controlPlaneId": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "cert",
+                "controlPlaneId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DpCertificate resources.\n",
+                "properties": {
+                    "cert": {
+                        "type": "string"
+                    },
+                    "controlPlaneId": {
+                        "type": "string"
                     }
                 },
                 "type": "object"

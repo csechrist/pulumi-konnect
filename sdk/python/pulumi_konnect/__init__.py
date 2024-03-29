@@ -6,6 +6,7 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .authentication_settings import *
+from .certificate import *
 from .consumer import *
 from .consumer_acl import *
 from .consumer_basic import *
@@ -13,6 +14,7 @@ from .consumer_hmac import *
 from .consumer_jwt import *
 from .consumer_key import *
 from .control_plane import *
+from .dp_certificate import *
 from .get_consumer import *
 from .get_control_plane import *
 from .get_nodes import *
@@ -51,6 +53,14 @@ _utilities.register(
   "fqn": "pulumi_konnect",
   "classes": {
    "konnect:index/authenticationSettings:AuthenticationSettings": "AuthenticationSettings"
+  }
+ },
+ {
+  "pkg": "konnect",
+  "mod": "index/certificate",
+  "fqn": "pulumi_konnect",
+  "classes": {
+   "konnect:index/certificate:Certificate": "Certificate"
   }
  },
  {
@@ -107,6 +117,14 @@ _utilities.register(
   "fqn": "pulumi_konnect",
   "classes": {
    "konnect:index/controlPlane:ControlPlane": "ControlPlane"
+  }
+ },
+ {
+  "pkg": "konnect",
+  "mod": "index/dpCertificate",
+  "fqn": "pulumi_konnect",
+  "classes": {
+   "konnect:index/dpCertificate:DpCertificate": "DpCertificate"
   }
  },
  {

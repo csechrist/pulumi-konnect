@@ -4,6 +4,9 @@
             "konnect_authentication_settings": {
                 "current": "konnect:index/authenticationSettings:AuthenticationSettings"
             },
+            "konnect_certificate": {
+                "current": "konnect:index/certificate:Certificate"
+            },
             "konnect_consumer": {
                 "current": "konnect:index/consumer:Consumer"
             },
@@ -24,6 +27,9 @@
             },
             "konnect_control_plane": {
                 "current": "konnect:index/controlPlane:ControlPlane"
+            },
+            "konnect_dp_certificate": {
+                "current": "konnect:index/dpCertificate:DpCertificate"
             },
             "konnect_identity_provider": {
                 "current": "konnect:index/identityProvider:IdentityProvider",
@@ -138,6 +144,7 @@
     "renames": {
         "resources": {
             "konnect:index/authenticationSettings:AuthenticationSettings": "konnect_authentication_settings",
+            "konnect:index/certificate:Certificate": "konnect_certificate",
             "konnect:index/consumer:Consumer": "konnect_consumer",
             "konnect:index/consumerACL:ConsumerACL": "konnect_consumer_acl",
             "konnect:index/consumerBasic:ConsumerBasic": "konnect_consumer_basic",
@@ -145,6 +152,7 @@
             "konnect:index/consumerJWT:ConsumerJWT": "konnect_consumer_jwt",
             "konnect:index/consumerKey:ConsumerKey": "konnect_consumer_key",
             "konnect:index/controlPlane:ControlPlane": "konnect_control_plane",
+            "konnect:index/dpCertificate:DpCertificate": "konnect_dp_certificate",
             "konnect:index/identityProvider:IdentityProvider": "konnect_identity_provider",
             "konnect:index/plugin:Plugin": "konnect_plugin",
             "konnect:index/route:Route": "konnect_route",
@@ -175,6 +183,11 @@
                 "idpMappingEnabled": "idp_mapping_enabled",
                 "konnectMappingEnabled": "konnect_mapping_enabled",
                 "oidcAuthEnabled": "oidc_auth_enabled"
+            },
+            "konnect:index/certificate:Certificate": {
+                "alternateCertificate": "alternate_certificate",
+                "alternateKey": "alternate_key",
+                "controlPlaneId": "control_plane_id"
             },
             "konnect:index/consumer:Consumer": {
                 "consumerId": "consumer_id",
@@ -212,6 +225,9 @@
                 "clusterType": "cluster_type",
                 "controlPlaneEndpoint": "control_plane_endpoint",
                 "telemetryEndpoint": "telemetry_endpoint"
+            },
+            "konnect:index/dpCertificate:DpCertificate": {
+                "controlPlaneId": "control_plane_id"
             },
             "konnect:index/getConsumer:getConsumer": {
                 "consumerId": "consumer_id",

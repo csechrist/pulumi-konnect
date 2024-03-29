@@ -5,9 +5,9 @@ go 1.22.1
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20230912190043-e6d96b3b8f7e
 
 require (
+	github.com/csechrist/terraform-provider-konnect v0.0.2
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.69.0
 	github.com/pulumi/pulumi/sdk/v3 v3.98.0
-	github.com/scastria/terraform-provider-konnect v0.2.3
 )
 
 require (
@@ -16,7 +16,7 @@ require (
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	cloud.google.com/go/iam v1.1.1 // indirect
 	cloud.google.com/go/kms v1.12.1 // indirect
-	cloud.google.com/go/logging v1.7.0 // indirect
+	cloud.google.com/go/logging v1.7.0 // indirect; indirectx
 	cloud.google.com/go/longrunning v0.5.1 // indirect
 	cloud.google.com/go/storage v1.30.1 // indirect
 	dario.cat/mergo v1.0.0 // indirect

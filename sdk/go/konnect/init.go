@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "konnect:index/authenticationSettings:AuthenticationSettings":
 		r = &AuthenticationSettings{}
+	case "konnect:index/certificate:Certificate":
+		r = &Certificate{}
 	case "konnect:index/consumer:Consumer":
 		r = &Consumer{}
 	case "konnect:index/consumerACL:ConsumerACL":
@@ -37,6 +39,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConsumerKey{}
 	case "konnect:index/controlPlane:ControlPlane":
 		r = &ControlPlane{}
+	case "konnect:index/dpCertificate:DpCertificate":
+		r = &DpCertificate{}
 	case "konnect:index/identityProvider:IdentityProvider":
 		r = &IdentityProvider{}
 	case "konnect:index/plugin:Plugin":
@@ -95,6 +99,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"konnect",
+		"index/certificate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"konnect",
 		"index/consumer",
 		&module{version},
 	)
@@ -126,6 +135,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"konnect",
 		"index/controlPlane",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"konnect",
+		"index/dpCertificate",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
