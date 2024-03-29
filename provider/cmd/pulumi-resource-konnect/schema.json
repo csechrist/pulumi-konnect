@@ -1,0 +1,2340 @@
+{
+    "name": "konnect",
+    "displayName": "Kong Konnect",
+    "description": "A Pulumi package for creating and managing Kong konnect cloud resources.",
+    "keywords": [
+        "pulumi",
+        "konnect",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`konnect` Terraform Provider](https://github.com/scastria/terraform-provider-konnect).",
+    "repository": "https://github.com/csechrist123/pulumi-konnect",
+    "publisher": "Cameron Sechrist",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20"
+        },
+        "go": {
+            "importBasePath": "github.com/csechrist123/pulumi-konnect/sdk/go/konnect",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageName": "@camsechrist/pulumi-konnect",
+            "packageDescription": "A Pulumi package for creating and managing Kong konnect cloud resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/scastria/terraform-provider-konnect)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-konnect` repo](https://github.com/csechrist123/pulumi-konnect/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-konnect` repo](https://github.com/scastria/terraform-provider-konnect/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/scastria/terraform-provider-konnect)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-konnect` repo](https://github.com/csechrist123/pulumi-konnect/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-konnect` repo](https://github.com/scastria/terraform-provider-konnect/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "pat": {
+                "type": "string"
+            },
+            "region": {
+                "type": "string"
+            }
+        },
+        "defaults": [
+            "pat"
+        ]
+    },
+    "types": {
+        "konnect:index/RouteHeader:RouteHeader": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "**(Required, String)** Name of header this route should require.\n"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Required, List of String)** Allowed values this header should equal.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "values"
+            ]
+        },
+        "konnect:index/TeamMappingsMapping:TeamMappingsMapping": {
+            "properties": {
+                "group": {
+                    "type": "string",
+                    "description": "**(Required, String)** Identifier of an IdP group that is contained with OIDC ID token for groups claim\n"
+                },
+                "teamIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Required, List of String)** Konnect teams that should map to this group.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "group",
+                "teamIds"
+            ]
+        },
+        "konnect:index/getNodesNode:getNodesNode": {
+            "properties": {
+                "configHash": {
+                    "type": "string",
+                    "description": "**(String)** Hash of the current configuration state of node.\n"
+                },
+                "dataPlaneCertId": {
+                    "type": "string",
+                    "description": "**(String)** Id of certificate used in communication between node and control plane.\n"
+                },
+                "hostname": {
+                    "type": "string",
+                    "description": "**(String)** Hostname of node.\n"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "**(String)** Id of node.\n"
+                },
+                "lastPing": {
+                    "type": "integer",
+                    "description": "**(Integer)** Last time of ping of node.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "**(String)** Type of node.\n"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "**(String)** Version of node.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "configHash",
+                "dataPlaneCertId",
+                "hostname",
+                "id",
+                "lastPing",
+                "type",
+                "version"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the konnect package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "pat": {
+                "type": "string"
+            },
+            "region": {
+                "type": "string"
+            }
+        },
+        "required": [
+            "pat"
+        ],
+        "inputProperties": {
+            "pat": {
+                "type": "string"
+            },
+            "region": {
+                "type": "string"
+            }
+        },
+        "requiredInputs": [
+            "pat"
+        ]
+    },
+    "resources": {
+        "konnect:index/authenticationSettings:AuthenticationSettings": {
+            "description": "Represents authentication settings\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\n\nconst example = new konnect.AuthenticationSettings(\"example\", {\n    basicAuthEnabled: true,\n    idpMappingEnabled: false,\n    konnectMappingEnabled: true,\n    oidcAuthEnabled: true,\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nexample = konnect.AuthenticationSettings(\"example\",\n    basic_auth_enabled=True,\n    idp_mapping_enabled=False,\n    konnect_mapping_enabled=True,\n    oidc_auth_enabled=True)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Konnect.AuthenticationSettings(\"example\", new()\n    {\n        BasicAuthEnabled = true,\n        IdpMappingEnabled = false,\n        KonnectMappingEnabled = true,\n        OidcAuthEnabled = true,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := konnect.NewAuthenticationSettings(ctx, \"example\", \u0026konnect.AuthenticationSettingsArgs{\n\t\t\tBasicAuthEnabled:      pulumi.Bool(true),\n\t\t\tIdpMappingEnabled:     pulumi.Bool(false),\n\t\t\tKonnectMappingEnabled: pulumi.Bool(true),\n\t\t\tOidcAuthEnabled:       pulumi.Bool(true),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.AuthenticationSettings;\nimport com.pulumi.konnect.AuthenticationSettingsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new AuthenticationSettings(\"example\", AuthenticationSettingsArgs.builder()        \n            .basicAuthEnabled(true)\n            .idpMappingEnabled(false)\n            .konnectMappingEnabled(true)\n            .oidcAuthEnabled(true)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:AuthenticationSettings\n    properties:\n      basicAuthEnabled: true\n      idpMappingEnabled: false\n      konnectMappingEnabled: true\n      oidcAuthEnabled: true\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nAuthentication settings can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "basicAuthEnabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether basic authentication is enabled.\n"
+                },
+                "idpMappingEnabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether IDP mapping is enabled.\n"
+                },
+                "konnectMappingEnabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether Konnect mapping is enabled.\n"
+                },
+                "oidcAuthEnabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether OIDC authentication is enabled.\n"
+                }
+            },
+            "inputProperties": {
+                "basicAuthEnabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether basic authentication is enabled.\n"
+                },
+                "idpMappingEnabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether IDP mapping is enabled.\n"
+                },
+                "konnectMappingEnabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether Konnect mapping is enabled.\n"
+                },
+                "oidcAuthEnabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether OIDC authentication is enabled.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AuthenticationSettings resources.\n",
+                "properties": {
+                    "basicAuthEnabled": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether basic authentication is enabled.\n"
+                    },
+                    "idpMappingEnabled": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether IDP mapping is enabled.\n"
+                    },
+                    "konnectMappingEnabled": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether Konnect mapping is enabled.\n"
+                    },
+                    "oidcAuthEnabled": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether OIDC authentication is enabled.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/consumer:Consumer": {
+            "description": "Represents a consumer within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst example = new konnect.Consumer(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    username: \"testuser\",\n    customId: \"testcustom\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nexample = konnect.Consumer(\"example\",\n    control_plane_id=control_plane.id,\n    username=\"testuser\",\n    custom_id=\"testcustom\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var example = new Konnect.Consumer(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        Username = \"testuser\",\n        CustomId = \"testcustom\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewConsumer(ctx, \"example\", \u0026konnect.ConsumerArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tUsername:       pulumi.String(\"testuser\"),\n\t\t\tCustomId:       pulumi.String(\"testcustom\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.Consumer;\nimport com.pulumi.konnect.ConsumerArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        var example = new Consumer(\"example\", ConsumerArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .username(\"testuser\")\n            .customId(\"testcustom\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:Consumer\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      username: testuser\n      customId: testcustom\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nConsumers can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(String)** Id of the consumer alone\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "customId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Field for storing an existing unique ID for the Consumer.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The unique username of the Consumer.\n"
+                }
+            },
+            "required": [
+                "consumerId",
+                "controlPlaneId"
+            ],
+            "inputProperties": {
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "customId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Field for storing an existing unique ID for the Consumer.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The unique username of the Consumer.\n"
+                }
+            },
+            "requiredInputs": [
+                "controlPlaneId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Consumer resources.\n",
+                "properties": {
+                    "consumerId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the consumer alone\n"
+                    },
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane.\n"
+                    },
+                    "customId": {
+                        "type": "string",
+                        "description": "**(Optional, String)** Field for storing an existing unique ID for the Consumer.\n"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The unique username of the Consumer.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/consumerACL:ConsumerACL": {
+            "description": "Represents an ACL credential for a consumer within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst consumer = controlPlane.then(controlPlane =\u003e konnect.getConsumer({\n    controlPlaneId: controlPlane.id,\n    searchUsername: \"Bob\",\n}));\nconst example = new konnect.ConsumerACL(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    consumerId: consumer.then(consumer =\u003e consumer.consumerId),\n    group: \"my-acl-group\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nconsumer = konnect.get_consumer(control_plane_id=control_plane.id,\n    search_username=\"Bob\")\nexample = konnect.ConsumerACL(\"example\",\n    control_plane_id=control_plane.id,\n    consumer_id=consumer.consumer_id,\n    group=\"my-acl-group\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var consumer = Konnect.GetConsumer.Invoke(new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        SearchUsername = \"Bob\",\n    });\n\n    var example = new Konnect.ConsumerACL(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        ConsumerId = consumer.Apply(getConsumerResult =\u003e getConsumerResult.ConsumerId),\n        Group = \"my-acl-group\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tconsumer, err := konnect.LookupConsumer(ctx, \u0026konnect.LookupConsumerArgs{\n\t\t\tControlPlaneId: controlPlane.Id,\n\t\t\tSearchUsername: pulumi.StringRef(\"Bob\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewConsumerACL(ctx, \"example\", \u0026konnect.ConsumerACLArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tConsumerId:     *pulumi.String(consumer.ConsumerId),\n\t\t\tGroup:          pulumi.String(\"my-acl-group\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.inputs.GetConsumerArgs;\nimport com.pulumi.konnect.ConsumerACL;\nimport com.pulumi.konnect.ConsumerACLArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        final var consumer = KonnectFunctions.getConsumer(GetConsumerArgs.builder()\n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .searchUsername(\"Bob\")\n            .build());\n\n        var example = new ConsumerACL(\"example\", ConsumerACLArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .consumerId(consumer.applyValue(getConsumerResult -\u003e getConsumerResult.consumerId()))\n            .group(\"my-acl-group\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:ConsumerACL\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      consumerId: ${consumer.consumerId}\n      group: my-acl-group\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n  consumer:\n    fn::invoke:\n      Function: konnect:getConsumer\n      Arguments:\n        controlPlaneId: ${controlPlane.id}\n        searchUsername: Bob\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nConsumer ACLs can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "aclId": {
+                    "type": "string",
+                    "description": "**(String)** Id of the consumer ACL alone\n"
+                },
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "group": {
+                    "type": "string",
+                    "description": "**(Required, String)** The ACL group value.\n"
+                }
+            },
+            "required": [
+                "aclId",
+                "consumerId",
+                "controlPlaneId",
+                "group"
+            ],
+            "inputProperties": {
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "group": {
+                    "type": "string",
+                    "description": "**(Required, String)** The ACL group value.\n"
+                }
+            },
+            "requiredInputs": [
+                "consumerId",
+                "controlPlaneId",
+                "group"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConsumerACL resources.\n",
+                "properties": {
+                    "aclId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the consumer ACL alone\n"
+                    },
+                    "consumerId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the consumer.\n"
+                    },
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane.\n"
+                    },
+                    "group": {
+                        "type": "string",
+                        "description": "**(Required, String)** The ACL group value.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/consumerBasic:ConsumerBasic": {
+            "description": "Represents a basic auth credential for a consumer within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst consumer = controlPlane.then(controlPlane =\u003e konnect.getConsumer({\n    controlPlaneId: controlPlane.id,\n    searchUsername: \"Bob\",\n}));\nconst example = new konnect.ConsumerBasic(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    consumerId: consumer.then(consumer =\u003e consumer.consumerId),\n    username: \"my-username\",\n    password: \"my-password\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nconsumer = konnect.get_consumer(control_plane_id=control_plane.id,\n    search_username=\"Bob\")\nexample = konnect.ConsumerBasic(\"example\",\n    control_plane_id=control_plane.id,\n    consumer_id=consumer.consumer_id,\n    username=\"my-username\",\n    password=\"my-password\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var consumer = Konnect.GetConsumer.Invoke(new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        SearchUsername = \"Bob\",\n    });\n\n    var example = new Konnect.ConsumerBasic(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        ConsumerId = consumer.Apply(getConsumerResult =\u003e getConsumerResult.ConsumerId),\n        Username = \"my-username\",\n        Password = \"my-password\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tconsumer, err := konnect.LookupConsumer(ctx, \u0026konnect.LookupConsumerArgs{\n\t\t\tControlPlaneId: controlPlane.Id,\n\t\t\tSearchUsername: pulumi.StringRef(\"Bob\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewConsumerBasic(ctx, \"example\", \u0026konnect.ConsumerBasicArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tConsumerId:     *pulumi.String(consumer.ConsumerId),\n\t\t\tUsername:       pulumi.String(\"my-username\"),\n\t\t\tPassword:       pulumi.String(\"my-password\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.inputs.GetConsumerArgs;\nimport com.pulumi.konnect.ConsumerBasic;\nimport com.pulumi.konnect.ConsumerBasicArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        final var consumer = KonnectFunctions.getConsumer(GetConsumerArgs.builder()\n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .searchUsername(\"Bob\")\n            .build());\n\n        var example = new ConsumerBasic(\"example\", ConsumerBasicArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .consumerId(consumer.applyValue(getConsumerResult -\u003e getConsumerResult.consumerId()))\n            .username(\"my-username\")\n            .password(\"my-password\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:ConsumerBasic\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      consumerId: ${consumer.consumerId}\n      username: my-username\n      password: my-password\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n  consumer:\n    fn::invoke:\n      Function: konnect:getConsumer\n      Arguments:\n        controlPlaneId: ${controlPlane.id}\n        searchUsername: Bob\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nConsumer basics can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "basicId": {
+                    "type": "string",
+                    "description": "**(String)** Id of the consumer basic auth alone\n"
+                },
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "**(Required, String)** The password value.\n"
+                },
+                "passwordHash": {
+                    "type": "string",
+                    "description": "**(String)** Hash of the password\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "**(Required, String)** The username value.\n"
+                }
+            },
+            "required": [
+                "basicId",
+                "consumerId",
+                "controlPlaneId",
+                "password",
+                "passwordHash",
+                "username"
+            ],
+            "inputProperties": {
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "**(Required, String)** The password value.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "**(Required, String)** The username value.\n"
+                }
+            },
+            "requiredInputs": [
+                "consumerId",
+                "controlPlaneId",
+                "password",
+                "username"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConsumerBasic resources.\n",
+                "properties": {
+                    "basicId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the consumer basic auth alone\n"
+                    },
+                    "consumerId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the consumer.\n"
+                    },
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane.\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "**(Required, String)** The password value.\n"
+                    },
+                    "passwordHash": {
+                        "type": "string",
+                        "description": "**(String)** Hash of the password\n"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "**(Required, String)** The username value.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/consumerHMAC:ConsumerHMAC": {
+            "description": "Represents an HMAC credential for a consumer within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst consumer = controlPlane.then(controlPlane =\u003e konnect.getConsumer({\n    controlPlaneId: controlPlane.id,\n    searchUsername: \"Bob\",\n}));\nconst example = new konnect.ConsumerHMAC(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    consumerId: consumer.then(consumer =\u003e consumer.consumerId),\n    username: \"my-username\",\n    secret: \"my-secret\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nconsumer = konnect.get_consumer(control_plane_id=control_plane.id,\n    search_username=\"Bob\")\nexample = konnect.ConsumerHMAC(\"example\",\n    control_plane_id=control_plane.id,\n    consumer_id=consumer.consumer_id,\n    username=\"my-username\",\n    secret=\"my-secret\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var consumer = Konnect.GetConsumer.Invoke(new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        SearchUsername = \"Bob\",\n    });\n\n    var example = new Konnect.ConsumerHMAC(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        ConsumerId = consumer.Apply(getConsumerResult =\u003e getConsumerResult.ConsumerId),\n        Username = \"my-username\",\n        Secret = \"my-secret\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tconsumer, err := konnect.LookupConsumer(ctx, \u0026konnect.LookupConsumerArgs{\n\t\t\tControlPlaneId: controlPlane.Id,\n\t\t\tSearchUsername: pulumi.StringRef(\"Bob\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewConsumerHMAC(ctx, \"example\", \u0026konnect.ConsumerHMACArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tConsumerId:     *pulumi.String(consumer.ConsumerId),\n\t\t\tUsername:       pulumi.String(\"my-username\"),\n\t\t\tSecret:         pulumi.String(\"my-secret\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.inputs.GetConsumerArgs;\nimport com.pulumi.konnect.ConsumerHMAC;\nimport com.pulumi.konnect.ConsumerHMACArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        final var consumer = KonnectFunctions.getConsumer(GetConsumerArgs.builder()\n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .searchUsername(\"Bob\")\n            .build());\n\n        var example = new ConsumerHMAC(\"example\", ConsumerHMACArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .consumerId(consumer.applyValue(getConsumerResult -\u003e getConsumerResult.consumerId()))\n            .username(\"my-username\")\n            .secret(\"my-secret\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:ConsumerHMAC\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      consumerId: ${consumer.consumerId}\n      username: my-username\n      secret: my-secret\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n  consumer:\n    fn::invoke:\n      Function: konnect:getConsumer\n      Arguments:\n        controlPlaneId: ${controlPlane.id}\n        searchUsername: Bob\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nConsumer HMACs can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "hmacId": {
+                    "type": "string",
+                    "description": "**(String)** Id of the consumer HMAC alone\n"
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "**(Optional/Computed, String)** The secret value.  If left out, a secret will be generated for you.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "**(Required, String)** The username value.\n"
+                }
+            },
+            "required": [
+                "consumerId",
+                "controlPlaneId",
+                "hmacId",
+                "secret",
+                "username"
+            ],
+            "inputProperties": {
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "**(Optional/Computed, String)** The secret value.  If left out, a secret will be generated for you.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "**(Required, String)** The username value.\n"
+                }
+            },
+            "requiredInputs": [
+                "consumerId",
+                "controlPlaneId",
+                "username"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConsumerHMAC resources.\n",
+                "properties": {
+                    "consumerId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the consumer.\n"
+                    },
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane.\n"
+                    },
+                    "hmacId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the consumer HMAC alone\n"
+                    },
+                    "secret": {
+                        "type": "string",
+                        "description": "**(Optional/Computed, String)** The secret value.  If left out, a secret will be generated for you.\n"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "**(Required, String)** The username value.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/consumerJWT:ConsumerJWT": {
+            "description": "Represents a JWT credential for a consumer within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst consumer = controlPlane.then(controlPlane =\u003e konnect.getConsumer({\n    controlPlaneId: controlPlane.id,\n    searchUsername: \"Bob\",\n}));\nconst example = new konnect.ConsumerJWT(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    consumerId: consumer.then(consumer =\u003e consumer.consumerId),\n    key: \"my-key\",\n    secret: \"my-secret\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nconsumer = konnect.get_consumer(control_plane_id=control_plane.id,\n    search_username=\"Bob\")\nexample = konnect.ConsumerJWT(\"example\",\n    control_plane_id=control_plane.id,\n    consumer_id=consumer.consumer_id,\n    key=\"my-key\",\n    secret=\"my-secret\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var consumer = Konnect.GetConsumer.Invoke(new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        SearchUsername = \"Bob\",\n    });\n\n    var example = new Konnect.ConsumerJWT(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        ConsumerId = consumer.Apply(getConsumerResult =\u003e getConsumerResult.ConsumerId),\n        Key = \"my-key\",\n        Secret = \"my-secret\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tconsumer, err := konnect.LookupConsumer(ctx, \u0026konnect.LookupConsumerArgs{\n\t\t\tControlPlaneId: controlPlane.Id,\n\t\t\tSearchUsername: pulumi.StringRef(\"Bob\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewConsumerJWT(ctx, \"example\", \u0026konnect.ConsumerJWTArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tConsumerId:     *pulumi.String(consumer.ConsumerId),\n\t\t\tKey:            pulumi.String(\"my-key\"),\n\t\t\tSecret:         pulumi.String(\"my-secret\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.inputs.GetConsumerArgs;\nimport com.pulumi.konnect.ConsumerJWT;\nimport com.pulumi.konnect.ConsumerJWTArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        final var consumer = KonnectFunctions.getConsumer(GetConsumerArgs.builder()\n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .searchUsername(\"Bob\")\n            .build());\n\n        var example = new ConsumerJWT(\"example\", ConsumerJWTArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .consumerId(consumer.applyValue(getConsumerResult -\u003e getConsumerResult.consumerId()))\n            .key(\"my-key\")\n            .secret(\"my-secret\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:ConsumerJWT\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      consumerId: ${consumer.consumerId}\n      key: my-key\n      secret: my-secret\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n  consumer:\n    fn::invoke:\n      Function: konnect:getConsumer\n      Arguments:\n        controlPlaneId: ${controlPlane.id}\n        searchUsername: Bob\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nConsumer JWTs can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "algorithm": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The algorithm for the JWT.  Allowed values: `HS256`, `HS384`, `HS512`, `RS256`, `RS384`, `RS512`, `ES256`, `ES384`. Default: `HS256`\n"
+                },
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "jwtId": {
+                    "type": "string",
+                    "description": "**(String)** Id of the consumer JWT alone\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "**(Optional/Computed, String)** The key value.  If left out, a key will be generated for you.\n"
+                },
+                "rsaPublicKey": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The RSA public key in PEM format for the JWT.  Required if `algorithm` is `RS256`, `RS384`, `RS512`, `ES256`, or `ES384`.\n"
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "**(Optional/Computed, String)** The secret value.  If left out, a key will be generated for you.\n"
+                }
+            },
+            "required": [
+                "consumerId",
+                "controlPlaneId",
+                "jwtId",
+                "key",
+                "secret"
+            ],
+            "inputProperties": {
+                "algorithm": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The algorithm for the JWT.  Allowed values: `HS256`, `HS384`, `HS512`, `RS256`, `RS384`, `RS512`, `ES256`, `ES384`. Default: `HS256`\n"
+                },
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "**(Optional/Computed, String)** The key value.  If left out, a key will be generated for you.\n"
+                },
+                "rsaPublicKey": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The RSA public key in PEM format for the JWT.  Required if `algorithm` is `RS256`, `RS384`, `RS512`, `ES256`, or `ES384`.\n"
+                },
+                "secret": {
+                    "type": "string",
+                    "description": "**(Optional/Computed, String)** The secret value.  If left out, a key will be generated for you.\n"
+                }
+            },
+            "requiredInputs": [
+                "consumerId",
+                "controlPlaneId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConsumerJWT resources.\n",
+                "properties": {
+                    "algorithm": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The algorithm for the JWT.  Allowed values: `HS256`, `HS384`, `HS512`, `RS256`, `RS384`, `RS512`, `ES256`, `ES384`. Default: `HS256`\n"
+                    },
+                    "consumerId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the consumer.\n"
+                    },
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane.\n"
+                    },
+                    "jwtId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the consumer JWT alone\n"
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "**(Optional/Computed, String)** The key value.  If left out, a key will be generated for you.\n"
+                    },
+                    "rsaPublicKey": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The RSA public key in PEM format for the JWT.  Required if `algorithm` is `RS256`, `RS384`, `RS512`, `ES256`, or `ES384`.\n"
+                    },
+                    "secret": {
+                        "type": "string",
+                        "description": "**(Optional/Computed, String)** The secret value.  If left out, a key will be generated for you.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/consumerKey:ConsumerKey": {
+            "description": "Represents an API key credential for a consumer within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst consumer = controlPlane.then(controlPlane =\u003e konnect.getConsumer({\n    controlPlaneId: controlPlane.id,\n    searchUsername: \"Bob\",\n}));\nconst example = new konnect.ConsumerKey(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    consumerId: consumer.then(consumer =\u003e consumer.consumerId),\n    key: \"my-api-key\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nconsumer = konnect.get_consumer(control_plane_id=control_plane.id,\n    search_username=\"Bob\")\nexample = konnect.ConsumerKey(\"example\",\n    control_plane_id=control_plane.id,\n    consumer_id=consumer.consumer_id,\n    key=\"my-api-key\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var consumer = Konnect.GetConsumer.Invoke(new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        SearchUsername = \"Bob\",\n    });\n\n    var example = new Konnect.ConsumerKey(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        ConsumerId = consumer.Apply(getConsumerResult =\u003e getConsumerResult.ConsumerId),\n        Key = \"my-api-key\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tconsumer, err := konnect.LookupConsumer(ctx, \u0026konnect.LookupConsumerArgs{\n\t\t\tControlPlaneId: controlPlane.Id,\n\t\t\tSearchUsername: pulumi.StringRef(\"Bob\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewConsumerKey(ctx, \"example\", \u0026konnect.ConsumerKeyArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tConsumerId:     *pulumi.String(consumer.ConsumerId),\n\t\t\tKey:            pulumi.String(\"my-api-key\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.inputs.GetConsumerArgs;\nimport com.pulumi.konnect.ConsumerKey;\nimport com.pulumi.konnect.ConsumerKeyArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        final var consumer = KonnectFunctions.getConsumer(GetConsumerArgs.builder()\n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .searchUsername(\"Bob\")\n            .build());\n\n        var example = new ConsumerKey(\"example\", ConsumerKeyArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .consumerId(consumer.applyValue(getConsumerResult -\u003e getConsumerResult.consumerId()))\n            .key(\"my-api-key\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:ConsumerKey\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      consumerId: ${consumer.consumerId}\n      key: my-api-key\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n  consumer:\n    fn::invoke:\n      Function: konnect:getConsumer\n      Arguments:\n        controlPlaneId: ${controlPlane.id}\n        searchUsername: Bob\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nConsumer keys can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "**(Optional/Computed, String)** The API key value.  If left out, a key will be generated for you.\n"
+                },
+                "keyId": {
+                    "type": "string",
+                    "description": "**(String)** Id of the consumer API key alone\n"
+                }
+            },
+            "required": [
+                "consumerId",
+                "controlPlaneId",
+                "key",
+                "keyId"
+            ],
+            "inputProperties": {
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the consumer.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "**(Optional/Computed, String)** The API key value.  If left out, a key will be generated for you.\n"
+                }
+            },
+            "requiredInputs": [
+                "consumerId",
+                "controlPlaneId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ConsumerKey resources.\n",
+                "properties": {
+                    "consumerId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the consumer.\n"
+                    },
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane.\n"
+                    },
+                    "key": {
+                        "type": "string",
+                        "description": "**(Optional/Computed, String)** The API key value.  If left out, a key will be generated for you.\n"
+                    },
+                    "keyId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the consumer API key alone\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/controlPlane:ControlPlane": {
+            "description": "Represents a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\n\nconst example = new konnect.ControlPlane(\"example\", {description: \"TestControlPlane\"});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nexample = konnect.ControlPlane(\"example\", description=\"TestControlPlane\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Konnect.ControlPlane(\"example\", new()\n    {\n        Description = \"TestControlPlane\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := konnect.NewControlPlane(ctx, \"example\", \u0026konnect.ControlPlaneArgs{\n\t\t\tDescription: pulumi.String(\"TestControlPlane\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.ControlPlane;\nimport com.pulumi.konnect.ControlPlaneArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ControlPlane(\"example\", ControlPlaneArgs.builder()        \n            .description(\"TestControlPlane\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:ControlPlane\n    properties:\n      description: TestControlPlane\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nControl planes can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "clusterType": {
+                    "type": "string",
+                    "description": "**(String)** The cluster type of the control plane.\n"
+                },
+                "controlPlaneEndpoint": {
+                    "type": "string",
+                    "description": "**(String)** The control plane endpoint URL of the control plane.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The description of the control plane.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Required, String)** The name of the control plane.\n"
+                },
+                "telemetryEndpoint": {
+                    "type": "string",
+                    "description": "**(String)** The telemetry endpoint URL of the control plane.\n"
+                }
+            },
+            "required": [
+                "clusterType",
+                "controlPlaneEndpoint",
+                "name",
+                "telemetryEndpoint"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The description of the control plane.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Required, String)** The name of the control plane.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ControlPlane resources.\n",
+                "properties": {
+                    "clusterType": {
+                        "type": "string",
+                        "description": "**(String)** The cluster type of the control plane.\n"
+                    },
+                    "controlPlaneEndpoint": {
+                        "type": "string",
+                        "description": "**(String)** The control plane endpoint URL of the control plane.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The description of the control plane.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "**(Required, String)** The name of the control plane.\n"
+                    },
+                    "telemetryEndpoint": {
+                        "type": "string",
+                        "description": "**(String)** The telemetry endpoint URL of the control plane.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/identityProvider:IdentityProvider": {
+            "description": "Represents identity provider settings\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\n\nconst example = new konnect.IdentityProvider(\"example\", {\n    clientId: \"XXXX\",\n    clientSecret: \"YYYY\",\n    emailClaimMapping: \"email\",\n    groupsClaimMapping: \"groups\",\n    issuer: \"https://example.com\",\n    loginPath: \"login\",\n    nameClaimMapping: \"name\",\n    scopes: [\n        \"email\",\n        \"openid\",\n        \"profile\",\n    ],\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nexample = konnect.IdentityProvider(\"example\",\n    client_id=\"XXXX\",\n    client_secret=\"YYYY\",\n    email_claim_mapping=\"email\",\n    groups_claim_mapping=\"groups\",\n    issuer=\"https://example.com\",\n    login_path=\"login\",\n    name_claim_mapping=\"name\",\n    scopes=[\n        \"email\",\n        \"openid\",\n        \"profile\",\n    ])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Konnect.IdentityProvider(\"example\", new()\n    {\n        ClientId = \"XXXX\",\n        ClientSecret = \"YYYY\",\n        EmailClaimMapping = \"email\",\n        GroupsClaimMapping = \"groups\",\n        Issuer = \"https://example.com\",\n        LoginPath = \"login\",\n        NameClaimMapping = \"name\",\n        Scopes = new[]\n        {\n            \"email\",\n            \"openid\",\n            \"profile\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := konnect.NewIdentityProvider(ctx, \"example\", \u0026konnect.IdentityProviderArgs{\n\t\t\tClientId:           pulumi.String(\"XXXX\"),\n\t\t\tClientSecret:       pulumi.String(\"YYYY\"),\n\t\t\tEmailClaimMapping:  pulumi.String(\"email\"),\n\t\t\tGroupsClaimMapping: pulumi.String(\"groups\"),\n\t\t\tIssuer:             pulumi.String(\"https://example.com\"),\n\t\t\tLoginPath:          pulumi.String(\"login\"),\n\t\t\tNameClaimMapping:   pulumi.String(\"name\"),\n\t\t\tScopes: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"email\"),\n\t\t\t\tpulumi.String(\"openid\"),\n\t\t\t\tpulumi.String(\"profile\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.IdentityProvider;\nimport com.pulumi.konnect.IdentityProviderArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new IdentityProvider(\"example\", IdentityProviderArgs.builder()        \n            .clientId(\"XXXX\")\n            .clientSecret(\"YYYY\")\n            .emailClaimMapping(\"email\")\n            .groupsClaimMapping(\"groups\")\n            .issuer(\"https://example.com\")\n            .loginPath(\"login\")\n            .nameClaimMapping(\"name\")\n            .scopes(            \n                \"email\",\n                \"openid\",\n                \"profile\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:IdentityProvider\n    properties:\n      clientId: XXXX\n      clientSecret: YYYY\n      emailClaimMapping: email\n      groupsClaimMapping: groups\n      issuer: https://example.com\n      loginPath: login\n      nameClaimMapping: name\n      scopes:\n        - email\n        - openid\n        - profile\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nIdentity provider can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "clientId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Client ID of the identity provider.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "**(Optional, String, Sensitive)** Client secret of the identity provider.\n",
+                    "secret": true
+                },
+                "emailClaimMapping": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Claim to map email for the identity provider.\n"
+                },
+                "groupsClaimMapping": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Claim to map groups for the identity provider.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Issuer of the identity provider.\n"
+                },
+                "loginPath": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Login path of the identity provider.\n"
+                },
+                "nameClaimMapping": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Claim to map name for the identity provider.\n"
+                },
+                "scopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** Scopes of the identity provider.\n"
+                }
+            },
+            "inputProperties": {
+                "clientId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Client ID of the identity provider.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "**(Optional, String, Sensitive)** Client secret of the identity provider.\n",
+                    "secret": true
+                },
+                "emailClaimMapping": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Claim to map email for the identity provider.\n"
+                },
+                "groupsClaimMapping": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Claim to map groups for the identity provider.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Issuer of the identity provider.\n"
+                },
+                "loginPath": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Login path of the identity provider.\n"
+                },
+                "nameClaimMapping": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Claim to map name for the identity provider.\n"
+                },
+                "scopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** Scopes of the identity provider.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering IdentityProvider resources.\n",
+                "properties": {
+                    "clientId": {
+                        "type": "string",
+                        "description": "**(Optional, String)** Client ID of the identity provider.\n"
+                    },
+                    "clientSecret": {
+                        "type": "string",
+                        "description": "**(Optional, String, Sensitive)** Client secret of the identity provider.\n",
+                        "secret": true
+                    },
+                    "emailClaimMapping": {
+                        "type": "string",
+                        "description": "**(Optional, String)** Claim to map email for the identity provider.\n"
+                    },
+                    "groupsClaimMapping": {
+                        "type": "string",
+                        "description": "**(Optional, String)** Claim to map groups for the identity provider.\n"
+                    },
+                    "issuer": {
+                        "type": "string",
+                        "description": "**(Optional, String)** Issuer of the identity provider.\n"
+                    },
+                    "loginPath": {
+                        "type": "string",
+                        "description": "**(Optional, String)** Login path of the identity provider.\n"
+                    },
+                    "nameClaimMapping": {
+                        "type": "string",
+                        "description": "**(Optional, String)** Claim to map name for the identity provider.\n"
+                    },
+                    "scopes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "**(Optional, List of String)** Scopes of the identity provider.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/plugin:Plugin": {
+            "description": "Represents a plugin within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst example = new konnect.Plugin(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    configJson: `{\n  \"minute\": 5\n}\n`,\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nexample = konnect.Plugin(\"example\",\n    control_plane_id=control_plane.id,\n    config_json=\"\"\"{\n  \"minute\": 5\n}\n\"\"\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var example = new Konnect.Plugin(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        ConfigJson = @\"{\n  \"\"minute\"\": 5\n}\n\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewPlugin(ctx, \"example\", \u0026konnect.PluginArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tConfigJson:     pulumi.String(\"{\\n  \\\"minute\\\": 5\\n}\\n\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.Plugin;\nimport com.pulumi.konnect.PluginArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        var example = new Plugin(\"example\", PluginArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .configJson(\"\"\"\n{\n  \"minute\": 5\n}\n            \"\"\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:Plugin\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      configJson: |\n        {\n          \"minute\": 5\n        }\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nPlugins can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "configAllJson": {
+                    "type": "string",
+                    "description": "**(JSON)** The full configuration properties for the plugin, including all properties with their default values not specified in `config`.\n"
+                },
+                "configJson": {
+                    "type": "string",
+                    "description": "**(Optional, JSON)** The configuration properties for the plugin which can be found on the plugins documentation page in the [Kong Plugin Hub](https://docs.konghq.com/hub/)\n"
+                },
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** If set, the plugin will activate only for requests where the specified consumer has been authenticated.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether the plugin is active. Default: `true`\n"
+                },
+                "instanceName": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The instance name of the plugin. Default: `-`\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Required, String)** The name of the plugin which must match a valid installed plugin.\n"
+                },
+                "pluginId": {
+                    "type": "string",
+                    "description": "**(String)** Id of the plugin alone\n"
+                },
+                "protocols": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** A list of the request protocols that will trigger this plugin. Allowed values: `grpc`, `grpcs`, `http`, `https`, `tcp`, `tls`, `tls_passthrough`, `udp`, `ws`, `wss`\n"
+                },
+                "routeId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** If set, the plugin will only activate when receiving requests via the specified route.\n"
+                },
+                "serviceId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** If set, the plugin will only activate when receiving requests via one of the routes belonging to the specified service.\n"
+                }
+            },
+            "required": [
+                "configAllJson",
+                "controlPlaneId",
+                "name",
+                "pluginId"
+            ],
+            "inputProperties": {
+                "configJson": {
+                    "type": "string",
+                    "description": "**(Optional, JSON)** The configuration properties for the plugin which can be found on the plugins documentation page in the [Kong Plugin Hub](https://docs.konghq.com/hub/)\n"
+                },
+                "consumerId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** If set, the plugin will activate only for requests where the specified consumer has been authenticated.\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether the plugin is active. Default: `true`\n"
+                },
+                "instanceName": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The instance name of the plugin. Default: `-`\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Required, String)** The name of the plugin which must match a valid installed plugin.\n"
+                },
+                "protocols": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** A list of the request protocols that will trigger this plugin. Allowed values: `grpc`, `grpcs`, `http`, `https`, `tcp`, `tls`, `tls_passthrough`, `udp`, `ws`, `wss`\n"
+                },
+                "routeId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** If set, the plugin will only activate when receiving requests via the specified route.\n"
+                },
+                "serviceId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** If set, the plugin will only activate when receiving requests via one of the routes belonging to the specified service.\n"
+                }
+            },
+            "requiredInputs": [
+                "controlPlaneId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Plugin resources.\n",
+                "properties": {
+                    "configAllJson": {
+                        "type": "string",
+                        "description": "**(JSON)** The full configuration properties for the plugin, including all properties with their default values not specified in `config`.\n"
+                    },
+                    "configJson": {
+                        "type": "string",
+                        "description": "**(Optional, JSON)** The configuration properties for the plugin which can be found on the plugins documentation page in the [Kong Plugin Hub](https://docs.konghq.com/hub/)\n"
+                    },
+                    "consumerId": {
+                        "type": "string",
+                        "description": "**(Optional, String)** If set, the plugin will activate only for requests where the specified consumer has been authenticated.\n"
+                    },
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane.\n"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether the plugin is active. Default: `true`\n"
+                    },
+                    "instanceName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The instance name of the plugin. Default: `-`\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "**(Required, String)** The name of the plugin which must match a valid installed plugin.\n"
+                    },
+                    "pluginId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the plugin alone\n"
+                    },
+                    "protocols": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "**(Optional, List of String)** A list of the request protocols that will trigger this plugin. Allowed values: `grpc`, `grpcs`, `http`, `https`, `tcp`, `tls`, `tls_passthrough`, `udp`, `ws`, `wss`\n"
+                    },
+                    "routeId": {
+                        "type": "string",
+                        "description": "**(Optional, String)** If set, the plugin will only activate when receiving requests via the specified route.\n"
+                    },
+                    "serviceId": {
+                        "type": "string",
+                        "description": "**(Optional, String)** If set, the plugin will only activate when receiving requests via one of the routes belonging to the specified service.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/route:Route": {
+            "description": "Represents a route within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst service = new konnect.Service(\"service\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    host: \"mockbin.org\",\n});\nconst example = new konnect.Route(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    serviceId: service.serviceId,\n    protocols: [\"http\"],\n    paths: [\"/example\"],\n    headers: [{\n        name: \"required-header\",\n        values: [\"required-header-values\"],\n    }],\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nservice = konnect.Service(\"service\",\n    control_plane_id=control_plane.id,\n    host=\"mockbin.org\")\nexample = konnect.Route(\"example\",\n    control_plane_id=control_plane.id,\n    service_id=service.service_id,\n    protocols=[\"http\"],\n    paths=[\"/example\"],\n    headers=[konnect.RouteHeaderArgs(\n        name=\"required-header\",\n        values=[\"required-header-values\"],\n    )])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var service = new Konnect.Service(\"service\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        Host = \"mockbin.org\",\n    });\n\n    var example = new Konnect.Route(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        ServiceId = service.ServiceId,\n        Protocols = new[]\n        {\n            \"http\",\n        },\n        Paths = new[]\n        {\n            \"/example\",\n        },\n        Headers = new[]\n        {\n            new Konnect.Inputs.RouteHeaderArgs\n            {\n                Name = \"required-header\",\n                Values = new[]\n                {\n                    \"required-header-values\",\n                },\n            },\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tservice, err := konnect.NewService(ctx, \"service\", \u0026konnect.ServiceArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tHost:           pulumi.String(\"mockbin.org\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewRoute(ctx, \"example\", \u0026konnect.RouteArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tServiceId:      service.ServiceId,\n\t\t\tProtocols: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"http\"),\n\t\t\t},\n\t\t\tPaths: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"/example\"),\n\t\t\t},\n\t\t\tHeaders: konnect.RouteHeaderArray{\n\t\t\t\t\u0026konnect.RouteHeaderArgs{\n\t\t\t\t\tName: pulumi.String(\"required-header\"),\n\t\t\t\t\tValues: pulumi.StringArray{\n\t\t\t\t\t\tpulumi.String(\"required-header-values\"),\n\t\t\t\t\t},\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.Service;\nimport com.pulumi.konnect.ServiceArgs;\nimport com.pulumi.konnect.Route;\nimport com.pulumi.konnect.RouteArgs;\nimport com.pulumi.konnect.inputs.RouteHeaderArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        var service = new Service(\"service\", ServiceArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .host(\"mockbin.org\")\n            .build());\n\n        var example = new Route(\"example\", RouteArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .serviceId(service.serviceId())\n            .protocols(\"http\")\n            .paths(\"/example\")\n            .headers(RouteHeaderArgs.builder()\n                .name(\"required-header\")\n                .values(\"required-header-values\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  service:\n    type: konnect:Service\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      host: mockbin.org\n  example:\n    type: konnect:Route\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      serviceId: ${service.serviceId}\n      protocols:\n        - http\n      paths:\n        - /example\n      headers:\n        - name: required-header\n          values:\n            - required-header-values\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nRoutes can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "headers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/konnect:index/RouteHeader:RouteHeader"
+                    },
+                    "description": "**(Optional, set{header})** Configuration block for a header.  Can be specified multiple times for each header.  Each block supports the fields documented below.\n"
+                },
+                "hosts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** The hosts this route should allow.\n"
+                },
+                "httpsRedirectStatusCode": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The status code Kong responds with when all properties of a Route match except the protocol. Allowed values: `426`, `301`, `302`, `307`, `308`. Default: `426`\n"
+                },
+                "methods": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** The methods this route should allow. Allowed values: `GET`, `PUT`, `POST`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`, `CONNECT`, `TRACE`\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The name of the route.\n"
+                },
+                "pathHandling": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Controls how the Service path, Route path and requested path are combined when sending a request to the upstream. Allowed values: `v0`, `v1`. Default: `v0`\n"
+                },
+                "paths": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** The paths this route should allow.\n"
+                },
+                "preserveHost": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether to use the request `Host` header during the Service request. Default: `false`\n"
+                },
+                "protocols": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** The protocols this route should allow. Allowed values: `http`, `https`\n"
+                },
+                "regexPriority": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** A number used to choose which route resolves a given request when several routes match it using regexes simultaneously. Default: `0`\n"
+                },
+                "requestBuffering": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether to enable request body buffering. Default: `true`\n"
+                },
+                "responseBuffering": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether to enable response body buffering. Default: `true`\n"
+                },
+                "routeId": {
+                    "type": "string",
+                    "description": "**(String)** Id of the route alone\n"
+                },
+                "serviceId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The id of the service to forward traffic to.\n"
+                },
+                "stripPath": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether to strip the matching prefix from the Service request. Default: `true`\n"
+                }
+            },
+            "required": [
+                "controlPlaneId",
+                "name",
+                "routeId"
+            ],
+            "inputProperties": {
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "headers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/konnect:index/RouteHeader:RouteHeader"
+                    },
+                    "description": "**(Optional, set{header})** Configuration block for a header.  Can be specified multiple times for each header.  Each block supports the fields documented below.\n"
+                },
+                "hosts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** The hosts this route should allow.\n"
+                },
+                "httpsRedirectStatusCode": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The status code Kong responds with when all properties of a Route match except the protocol. Allowed values: `426`, `301`, `302`, `307`, `308`. Default: `426`\n"
+                },
+                "methods": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** The methods this route should allow. Allowed values: `GET`, `PUT`, `POST`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`, `CONNECT`, `TRACE`\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The name of the route.\n"
+                },
+                "pathHandling": {
+                    "type": "string",
+                    "description": "**(Optional, String)** Controls how the Service path, Route path and requested path are combined when sending a request to the upstream. Allowed values: `v0`, `v1`. Default: `v0`\n"
+                },
+                "paths": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** The paths this route should allow.\n"
+                },
+                "preserveHost": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether to use the request `Host` header during the Service request. Default: `false`\n"
+                },
+                "protocols": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "**(Optional, List of String)** The protocols this route should allow. Allowed values: `http`, `https`\n"
+                },
+                "regexPriority": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** A number used to choose which route resolves a given request when several routes match it using regexes simultaneously. Default: `0`\n"
+                },
+                "requestBuffering": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether to enable request body buffering. Default: `true`\n"
+                },
+                "responseBuffering": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether to enable response body buffering. Default: `true`\n"
+                },
+                "serviceId": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The id of the service to forward traffic to.\n"
+                },
+                "stripPath": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether to strip the matching prefix from the Service request. Default: `true`\n"
+                }
+            },
+            "requiredInputs": [
+                "controlPlaneId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Route resources.\n",
+                "properties": {
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane.\n"
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/konnect:index/RouteHeader:RouteHeader"
+                        },
+                        "description": "**(Optional, set{header})** Configuration block for a header.  Can be specified multiple times for each header.  Each block supports the fields documented below.\n"
+                    },
+                    "hosts": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "**(Optional, List of String)** The hosts this route should allow.\n"
+                    },
+                    "httpsRedirectStatusCode": {
+                        "type": "integer",
+                        "description": "**(Optional, Integer)** The status code Kong responds with when all properties of a Route match except the protocol. Allowed values: `426`, `301`, `302`, `307`, `308`. Default: `426`\n"
+                    },
+                    "methods": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "**(Optional, List of String)** The methods this route should allow. Allowed values: `GET`, `PUT`, `POST`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`, `CONNECT`, `TRACE`\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The name of the route.\n"
+                    },
+                    "pathHandling": {
+                        "type": "string",
+                        "description": "**(Optional, String)** Controls how the Service path, Route path and requested path are combined when sending a request to the upstream. Allowed values: `v0`, `v1`. Default: `v0`\n"
+                    },
+                    "paths": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "**(Optional, List of String)** The paths this route should allow.\n"
+                    },
+                    "preserveHost": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether to use the request `Host` header during the Service request. Default: `false`\n"
+                    },
+                    "protocols": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "**(Optional, List of String)** The protocols this route should allow. Allowed values: `http`, `https`\n"
+                    },
+                    "regexPriority": {
+                        "type": "integer",
+                        "description": "**(Optional, Integer)** A number used to choose which route resolves a given request when several routes match it using regexes simultaneously. Default: `0`\n"
+                    },
+                    "requestBuffering": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether to enable request body buffering. Default: `true`\n"
+                    },
+                    "responseBuffering": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether to enable response body buffering. Default: `true`\n"
+                    },
+                    "routeId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the route alone\n"
+                    },
+                    "serviceId": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The id of the service to forward traffic to.\n"
+                    },
+                    "stripPath": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether to strip the matching prefix from the Service request. Default: `true`\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/service:Service": {
+            "description": "Represents a service within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst example = new konnect.Service(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    host: \"mockbin.org\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nexample = konnect.Service(\"example\",\n    control_plane_id=control_plane.id,\n    host=\"mockbin.org\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var example = new Konnect.Service(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        Host = \"mockbin.org\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewService(ctx, \"example\", \u0026konnect.ServiceArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tHost:           pulumi.String(\"mockbin.org\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.Service;\nimport com.pulumi.konnect.ServiceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        var example = new Service(\"example\", ServiceArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .host(\"mockbin.org\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:Service\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      host: mockbin.org\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nServices can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "connectTimeout": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether the service is active. Default: `true`\n"
+                },
+                "host": {
+                    "type": "string",
+                    "description": "**(Required, String)** The host of the service.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The name of the service.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The path to be used in requests to the host.\n"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The port used to communicate with the host. Default: `80`\n"
+                },
+                "protocol": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The protocol used to communicate with the host. Allowed values: `grpc`, `grpcs`, `http`, `https`, `tcp`, `tls`, `tls_passthrough`, `udp`, `ws`, `wss`\n"
+                },
+                "readTimeout": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The timeout in milliseconds between two successive read operations for transmitting a request to the host. Default: `60000`\n"
+                },
+                "retries": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The number of retries to execute upon failure to proxy. Default: `5`\n"
+                },
+                "serviceId": {
+                    "type": "string",
+                    "description": "**(String)** Id of the service alone\n"
+                },
+                "writeTimeout": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The timeout in milliseconds between two successive write operations for transmitting a request to the host. Default: `60000`\n"
+                }
+            },
+            "required": [
+                "controlPlaneId",
+                "host",
+                "name",
+                "serviceId"
+            ],
+            "inputProperties": {
+                "connectTimeout": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`\n"
+                },
+                "controlPlaneId": {
+                    "type": "string",
+                    "description": "**(Required, String)** The id of the control plane.\n"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "**(Optional, Boolean)** Whether the service is active. Default: `true`\n"
+                },
+                "host": {
+                    "type": "string",
+                    "description": "**(Required, String)** The host of the service.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The name of the service.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The path to be used in requests to the host.\n"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The port used to communicate with the host. Default: `80`\n"
+                },
+                "protocol": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The protocol used to communicate with the host. Allowed values: `grpc`, `grpcs`, `http`, `https`, `tcp`, `tls`, `tls_passthrough`, `udp`, `ws`, `wss`\n"
+                },
+                "readTimeout": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The timeout in milliseconds between two successive read operations for transmitting a request to the host. Default: `60000`\n"
+                },
+                "retries": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The number of retries to execute upon failure to proxy. Default: `5`\n"
+                },
+                "writeTimeout": {
+                    "type": "integer",
+                    "description": "**(Optional, Integer)** The timeout in milliseconds between two successive write operations for transmitting a request to the host. Default: `60000`\n"
+                }
+            },
+            "requiredInputs": [
+                "controlPlaneId",
+                "host"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Service resources.\n",
+                "properties": {
+                    "connectTimeout": {
+                        "type": "integer",
+                        "description": "**(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`\n"
+                    },
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane.\n"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** Whether the service is active. Default: `true`\n"
+                    },
+                    "host": {
+                        "type": "string",
+                        "description": "**(Required, String)** The host of the service.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The name of the service.\n"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The path to be used in requests to the host.\n"
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "**(Optional, Integer)** The port used to communicate with the host. Default: `80`\n"
+                    },
+                    "protocol": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The protocol used to communicate with the host. Allowed values: `grpc`, `grpcs`, `http`, `https`, `tcp`, `tls`, `tls_passthrough`, `udp`, `ws`, `wss`\n"
+                    },
+                    "readTimeout": {
+                        "type": "integer",
+                        "description": "**(Optional, Integer)** The timeout in milliseconds between two successive read operations for transmitting a request to the host. Default: `60000`\n"
+                    },
+                    "retries": {
+                        "type": "integer",
+                        "description": "**(Optional, Integer)** The number of retries to execute upon failure to proxy. Default: `5`\n"
+                    },
+                    "serviceId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the service alone\n"
+                    },
+                    "writeTimeout": {
+                        "type": "integer",
+                        "description": "**(Optional, Integer)** The timeout in milliseconds between two successive write operations for transmitting a request to the host. Default: `60000`\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/team:Team": {
+            "description": "Represents a team\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\n\nconst example = new konnect.Team(\"example\", {description: \"dev team\"});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nexample = konnect.Team(\"example\", description=\"dev team\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Konnect.Team(\"example\", new()\n    {\n        Description = \"dev team\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := konnect.NewTeam(ctx, \"example\", \u0026konnect.TeamArgs{\n\t\t\tDescription: pulumi.String(\"dev team\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.Team;\nimport com.pulumi.konnect.TeamArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Team(\"example\", TeamArgs.builder()        \n            .description(\"dev team\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:Team\n    properties:\n      description: dev team\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTeams can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The description of the team.\n"
+                },
+                "isPredefined": {
+                    "type": "boolean",
+                    "description": "**(Boolean)** Whether the team is predefined.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Required, String)** The name of the team.\n"
+                }
+            },
+            "required": [
+                "isPredefined",
+                "name"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The description of the team.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "**(Required, String)** The name of the team.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Team resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The description of the team.\n"
+                    },
+                    "isPredefined": {
+                        "type": "boolean",
+                        "description": "**(Boolean)** Whether the team is predefined.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "**(Required, String)** The name of the team.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/teamMappings:TeamMappings": {
+            "description": "Represents the mappings between an external identity provider group and a Konnect team\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\n\nconst team = new konnect.Team(\"team\", {description: \"testing\"});\nconst example = new konnect.TeamMappings(\"example\", {mappings: [{\n    group: \"external IdP group\",\n    teamIds: [team.id],\n}]});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nteam = konnect.Team(\"team\", description=\"testing\")\nexample = konnect.TeamMappings(\"example\", mappings=[konnect.TeamMappingsMappingArgs(\n    group=\"external IdP group\",\n    team_ids=[team.id],\n)])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var team = new Konnect.Team(\"team\", new()\n    {\n        Description = \"testing\",\n    });\n\n    var example = new Konnect.TeamMappings(\"example\", new()\n    {\n        Mappings = new[]\n        {\n            new Konnect.Inputs.TeamMappingsMappingArgs\n            {\n                Group = \"external IdP group\",\n                TeamIds = new[]\n                {\n                    team.Id,\n                },\n            },\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tteam, err := konnect.NewTeam(ctx, \"team\", \u0026konnect.TeamArgs{\n\t\t\tDescription: pulumi.String(\"testing\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewTeamMappings(ctx, \"example\", \u0026konnect.TeamMappingsArgs{\n\t\t\tMappings: konnect.TeamMappingsMappingArray{\n\t\t\t\t\u0026konnect.TeamMappingsMappingArgs{\n\t\t\t\t\tGroup: pulumi.String(\"external IdP group\"),\n\t\t\t\t\tTeamIds: pulumi.StringArray{\n\t\t\t\t\t\tteam.ID(),\n\t\t\t\t\t},\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.Team;\nimport com.pulumi.konnect.TeamArgs;\nimport com.pulumi.konnect.TeamMappings;\nimport com.pulumi.konnect.TeamMappingsArgs;\nimport com.pulumi.konnect.inputs.TeamMappingsMappingArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var team = new Team(\"team\", TeamArgs.builder()        \n            .description(\"testing\")\n            .build());\n\n        var example = new TeamMappings(\"example\", TeamMappingsArgs.builder()        \n            .mappings(TeamMappingsMappingArgs.builder()\n                .group(\"external IdP group\")\n                .teamIds(team.id())\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  team:\n    type: konnect:Team\n    properties:\n      description: testing\n  example:\n    type: konnect:TeamMappings\n    properties:\n      mappings:\n        - group: external IdP group\n          teamIds:\n            - ${team.id}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTeam mappings can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "mappings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/konnect:index/TeamMappingsMapping:TeamMappingsMapping"
+                    },
+                    "description": "**(Optional, set{mapping})** Configuration block for a mapping.  Can be specified multiple times for each mapping.  Each block supports the fields documented below.\n"
+                }
+            },
+            "inputProperties": {
+                "mappings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/konnect:index/TeamMappingsMapping:TeamMappingsMapping"
+                    },
+                    "description": "**(Optional, set{mapping})** Configuration block for a mapping.  Can be specified multiple times for each mapping.  Each block supports the fields documented below.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TeamMappings resources.\n",
+                "properties": {
+                    "mappings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/konnect:index/TeamMappingsMapping:TeamMappingsMapping"
+                        },
+                        "description": "**(Optional, set{mapping})** Configuration block for a mapping.  Can be specified multiple times for each mapping.  Each block supports the fields documented below.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/teamRole:TeamRole": {
+            "description": "Represents a role assigned to a team to access a given entity\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.Team;\nimport com.pulumi.konnect.TeamArgs;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetRoleArgs;\nimport com.pulumi.konnect.ControlPlane;\nimport com.pulumi.konnect.ControlPlaneArgs;\nimport com.pulumi.konnect.TeamRole;\nimport com.pulumi.konnect.TeamRoleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var team = new Team(\"team\", TeamArgs.builder()        \n            .description(\"testing\")\n            .build());\n\n        final var role = KonnectFunctions.getRole(GetRoleArgs.builder()\n            .groupDisplayName(\"Control Planes\")\n            .displayName(\"Admin\")\n            .build());\n\n        var controlPlane = new ControlPlane(\"controlPlane\", ControlPlaneArgs.builder()        \n            .description(\"testing\")\n            .build());\n\n        var example = new TeamRole(\"example\", TeamRoleArgs.builder()        \n            .teamId(team.id())\n            .entityId(controlPlane.id())\n            .entityTypeDisplayName(\"Control Planes\")\n            .entityRegion(\"us\")\n            .roleDisplayName(role.applyValue(getRoleResult -\u003e getRoleResult.displayName()))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  team:\n    type: konnect:Team\n    properties:\n      description: testing\n  controlPlane:\n    type: konnect:ControlPlane\n    properties:\n      description: testing\n  example:\n    type: konnect:TeamRole\n    properties:\n      teamId: ${team.id}\n      entityId: ${controlPlane.id}\n      entityTypeDisplayName: Control Planes\n      entityRegion: us\n      roleDisplayName: ${role.displayName}\nvariables:\n  role:\n    fn::invoke:\n      Function: konnect:getRole\n      Arguments:\n        groupDisplayName: Control Planes\n        displayName: Admin\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTeam roles can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "entityId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the entity for which the role applies.\n"
+                },
+                "entityRegion": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The region of the entity for which the role applies.\n"
+                },
+                "entityTypeDisplayName": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The display name of the entity type, like `Control Planes` or `Services`.\n"
+                },
+                "roleDisplayName": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The display name of the role.\n"
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the team assigned the role\n"
+                }
+            },
+            "required": [
+                "entityId",
+                "entityRegion",
+                "entityTypeDisplayName",
+                "roleDisplayName",
+                "teamId"
+            ],
+            "inputProperties": {
+                "entityId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the entity for which the role applies.\n",
+                    "willReplaceOnChanges": true
+                },
+                "entityRegion": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The region of the entity for which the role applies.\n",
+                    "willReplaceOnChanges": true
+                },
+                "entityTypeDisplayName": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The display name of the entity type, like `Control Planes` or `Services`.\n",
+                    "willReplaceOnChanges": true
+                },
+                "roleDisplayName": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The display name of the role.\n",
+                    "willReplaceOnChanges": true
+                },
+                "teamId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the team assigned the role\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "entityId",
+                "entityRegion",
+                "entityTypeDisplayName",
+                "roleDisplayName",
+                "teamId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TeamRole resources.\n",
+                "properties": {
+                    "entityId": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The id of the entity for which the role applies.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "entityRegion": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The region of the entity for which the role applies.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "entityTypeDisplayName": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The display name of the entity type, like `Control Planes` or `Services`.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "roleDisplayName": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The display name of the role.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "teamId": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The id of the team assigned the role\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/teamUser:TeamUser": {
+            "description": "Represents a member of a team\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst team = new konnect.Team(\"team\", {description: \"testing\"});\nconst user = konnect.getUser({\n    searchFullName: \"Joe\",\n});\nconst example = new konnect.TeamUser(\"example\", {\n    teamId: team.id,\n    userId: user.then(user =\u003e user.id),\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nteam = konnect.Team(\"team\", description=\"testing\")\nuser = konnect.get_user(search_full_name=\"Joe\")\nexample = konnect.TeamUser(\"example\",\n    team_id=team.id,\n    user_id=user.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var team = new Konnect.Team(\"team\", new()\n    {\n        Description = \"testing\",\n    });\n\n    var user = Konnect.GetUser.Invoke(new()\n    {\n        SearchFullName = \"Joe\",\n    });\n\n    var example = new Konnect.TeamUser(\"example\", new()\n    {\n        TeamId = team.Id,\n        UserId = user.Apply(getUserResult =\u003e getUserResult.Id),\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tteam, err := konnect.NewTeam(ctx, \"team\", \u0026konnect.TeamArgs{\n\t\t\tDescription: pulumi.String(\"testing\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tuser, err := konnect.LookupUser(ctx, \u0026konnect.LookupUserArgs{\n\t\t\tSearchFullName: pulumi.StringRef(\"Joe\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewTeamUser(ctx, \"example\", \u0026konnect.TeamUserArgs{\n\t\t\tTeamId: team.ID(),\n\t\t\tUserId: *pulumi.String(user.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.Team;\nimport com.pulumi.konnect.TeamArgs;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetUserArgs;\nimport com.pulumi.konnect.TeamUser;\nimport com.pulumi.konnect.TeamUserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var team = new Team(\"team\", TeamArgs.builder()        \n            .description(\"testing\")\n            .build());\n\n        final var user = KonnectFunctions.getUser(GetUserArgs.builder()\n            .searchFullName(\"Joe\")\n            .build());\n\n        var example = new TeamUser(\"example\", TeamUserArgs.builder()        \n            .teamId(team.id())\n            .userId(user.applyValue(getUserResult -\u003e getUserResult.id()))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  team:\n    type: konnect:Team\n    properties:\n      description: testing\n  example:\n    type: konnect:TeamUser\n    properties:\n      teamId: ${team.id}\n      userId: ${user.id}\nvariables:\n  user:\n    fn::invoke:\n      Function: konnect:getUser\n      Arguments:\n        searchFullName: Joe\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nTeam users can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "teamId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the team.\n"
+                },
+                "userId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the user.\n"
+                }
+            },
+            "required": [
+                "teamId",
+                "userId"
+            ],
+            "inputProperties": {
+                "teamId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the team.\n",
+                    "willReplaceOnChanges": true
+                },
+                "userId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the user.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "teamId",
+                "userId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TeamUser resources.\n",
+                "properties": {
+                    "teamId": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The id of the team.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "userId": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The id of the user.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/user:User": {
+            "description": "Represents a user\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\n\nconst example = new konnect.User(\"example\", {\n    email: \"Joe.Burrow@example.com\",\n    fullName: \"Joe Burrow\",\n    preferredName: \"Joe\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nexample = konnect.User(\"example\",\n    email=\"Joe.Burrow@example.com\",\n    full_name=\"Joe Burrow\",\n    preferred_name=\"Joe\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Konnect.User(\"example\", new()\n    {\n        Email = \"Joe.Burrow@example.com\",\n        FullName = \"Joe Burrow\",\n        PreferredName = \"Joe\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := konnect.NewUser(ctx, \"example\", \u0026konnect.UserArgs{\n\t\t\tEmail:         pulumi.String(\"Joe.Burrow@example.com\"),\n\t\t\tFullName:      pulumi.String(\"Joe Burrow\"),\n\t\t\tPreferredName: pulumi.String(\"Joe\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.User;\nimport com.pulumi.konnect.UserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new User(\"example\", UserArgs.builder()        \n            .email(\"Joe.Burrow@example.com\")\n            .fullName(\"Joe Burrow\")\n            .preferredName(\"Joe\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:User\n    properties:\n      email: Joe.Burrow@example.com\n      fullName: Joe Burrow\n      preferredName: Joe\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nUsers can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "description": "**(Boolean)** Whether the user is active.\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "**(Required, String)** The email of the user.\n"
+                },
+                "fullName": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The full name of the user.\n"
+                },
+                "preferredName": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The preferred name of the user.\n"
+                }
+            },
+            "required": [
+                "active",
+                "email"
+            ],
+            "inputProperties": {
+                "email": {
+                    "type": "string",
+                    "description": "**(Required, String)** The email of the user.\n"
+                },
+                "fullName": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The full name of the user.\n"
+                },
+                "preferredName": {
+                    "type": "string",
+                    "description": "**(Optional, String)** The preferred name of the user.\n"
+                }
+            },
+            "requiredInputs": [
+                "email"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering User resources.\n",
+                "properties": {
+                    "active": {
+                        "type": "boolean",
+                        "description": "**(Boolean)** Whether the user is active.\n"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "**(Required, String)** The email of the user.\n"
+                    },
+                    "fullName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The full name of the user.\n"
+                    },
+                    "preferredName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The preferred name of the user.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "konnect:index/userRole:UserRole": {
+            "description": "Represents a role assigned to a user to access a given entity\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.User;\nimport com.pulumi.konnect.UserArgs;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetRoleArgs;\nimport com.pulumi.konnect.ControlPlane;\nimport com.pulumi.konnect.ControlPlaneArgs;\nimport com.pulumi.konnect.UserRole;\nimport com.pulumi.konnect.UserRoleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var user = new User(\"user\", UserArgs.builder()        \n            .email(\"Joe.Burrow@example.com\")\n            .fullName(\"Joe Burrow\")\n            .preferredName(\"Joe\")\n            .build());\n\n        final var role = KonnectFunctions.getRole(GetRoleArgs.builder()\n            .groupDisplayName(\"Control Planes\")\n            .displayName(\"Admin\")\n            .build());\n\n        var controlPlane = new ControlPlane(\"controlPlane\", ControlPlaneArgs.builder()        \n            .description(\"testing\")\n            .build());\n\n        var example = new UserRole(\"example\", UserRoleArgs.builder()        \n            .userId(user.id())\n            .entityId(controlPlane.id())\n            .entityTypeDisplayName(\"Control Planes\")\n            .entityRegion(\"us\")\n            .roleDisplayName(role.applyValue(getRoleResult -\u003e getRoleResult.displayName()))\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  user:\n    type: konnect:User\n    properties:\n      email: Joe.Burrow@example.com\n      fullName: Joe Burrow\n      preferredName: Joe\n  controlPlane:\n    type: konnect:ControlPlane\n    properties:\n      description: testing\n  example:\n    type: konnect:UserRole\n    properties:\n      userId: ${user.id}\n      entityId: ${controlPlane.id}\n      entityTypeDisplayName: Control Planes\n      entityRegion: us\n      roleDisplayName: ${role.displayName}\nvariables:\n  role:\n    fn::invoke:\n      Function: konnect:getRole\n      Arguments:\n        groupDisplayName: Control Planes\n        displayName: Admin\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nUser roles can be imported using a proper value of `id` as described above ",
+            "properties": {
+                "entityId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the entity for which the role applies.\n"
+                },
+                "entityRegion": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The region of the entity for which the role applies.\n"
+                },
+                "entityTypeDisplayName": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The display name of the entity type, like `Control Planes` or `Services`.\n"
+                },
+                "roleDisplayName": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The display name of the role.\n"
+                },
+                "userId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the user assigned the role\n"
+                }
+            },
+            "required": [
+                "entityId",
+                "entityRegion",
+                "entityTypeDisplayName",
+                "roleDisplayName",
+                "userId"
+            ],
+            "inputProperties": {
+                "entityId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the entity for which the role applies.\n",
+                    "willReplaceOnChanges": true
+                },
+                "entityRegion": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The region of the entity for which the role applies.\n",
+                    "willReplaceOnChanges": true
+                },
+                "entityTypeDisplayName": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The display name of the entity type, like `Control Planes` or `Services`.\n",
+                    "willReplaceOnChanges": true
+                },
+                "roleDisplayName": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The display name of the role.\n",
+                    "willReplaceOnChanges": true
+                },
+                "userId": {
+                    "type": "string",
+                    "description": "**(Required, ForceNew, String)** The id of the user assigned the role\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "entityId",
+                "entityRegion",
+                "entityTypeDisplayName",
+                "roleDisplayName",
+                "userId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering UserRole resources.\n",
+                "properties": {
+                    "entityId": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The id of the entity for which the role applies.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "entityRegion": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The region of the entity for which the role applies.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "entityTypeDisplayName": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The display name of the entity type, like `Control Planes` or `Services`.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "roleDisplayName": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The display name of the role.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "userId": {
+                        "type": "string",
+                        "description": "**(Required, ForceNew, String)** The id of the user assigned the role\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "konnect:index/getConsumer:getConsumer": {
+            "description": "Represents a consumer\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst example = controlPlane.then(controlPlane =\u003e konnect.getConsumer({\n    controlPlaneId: controlPlane.id,\n    searchUsername: \"Bob\",\n}));\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nexample = konnect.get_consumer(control_plane_id=control_plane.id,\n    search_username=\"Bob\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var example = Konnect.GetConsumer.Invoke(new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        SearchUsername = \"Bob\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.LookupConsumer(ctx, \u0026konnect.LookupConsumerArgs{\n\t\t\tControlPlaneId: controlPlane.Id,\n\t\t\tSearchUsername: pulumi.StringRef(\"Bob\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.inputs.GetConsumerArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        final var example = KonnectFunctions.getConsumer(GetConsumerArgs.builder()\n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .searchUsername(\"Bob\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n  example:\n    fn::invoke:\n      Function: konnect:getConsumer\n      Arguments:\n        controlPlaneId: ${controlPlane.id}\n        searchUsername: Bob\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getConsumer.\n",
+                "properties": {
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the control plane containing consumer\n"
+                    },
+                    "customId": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the custom_id of the consumer. Uses equality.\n"
+                    },
+                    "searchCustomId": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the custom_id of the consumer. Uses contains.\n"
+                    },
+                    "searchUsername": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the username of the consumer. Uses contains.\n"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the username of the consumer. Uses equality.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "controlPlaneId"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getConsumer.\n",
+                "properties": {
+                    "consumerId": {
+                        "type": "string",
+                        "description": "**(String)** Id of the consumer alone\n"
+                    },
+                    "controlPlaneId": {
+                        "type": "string"
+                    },
+                    "customId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "searchCustomId": {
+                        "type": "string"
+                    },
+                    "searchUsername": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "consumerId",
+                    "controlPlaneId",
+                    "id"
+                ]
+            }
+        },
+        "konnect:index/getControlPlane:getControlPlane": {
+            "description": "Represents a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst example = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nexample = konnect.get_control_plane(name=\"TestControlPlane\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var example = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  example:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getControlPlane.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the name of the control plane. Uses equality.\n"
+                    },
+                    "searchName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the name of the control plane. Uses contains.\n"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getControlPlane.\n",
+                "properties": {
+                    "clusterType": {
+                        "type": "string",
+                        "description": "**(String)** The cluster type of the control plane.\n"
+                    },
+                    "controlPlaneEndpoint": {
+                        "type": "string",
+                        "description": "**(String)** The control plane endpoint URL of the control plane.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "**(String)** The description of the control plane.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "searchName": {
+                        "type": "string"
+                    },
+                    "telemetryEndpoint": {
+                        "type": "string",
+                        "description": "**(String)** The telemetry endpoint URL of the control plane.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "clusterType",
+                    "controlPlaneEndpoint",
+                    "description",
+                    "telemetryEndpoint",
+                    "id"
+                ]
+            }
+        },
+        "konnect:index/getNodes:getNodes": {
+            "description": "Represents all nodes of a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst example = controlPlane.then(controlPlane =\u003e konnect.getNodes({\n    controlPlaneId: controlPlane.id,\n}));\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nexample = konnect.get_nodes(control_plane_id=control_plane.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var example = Konnect.GetNodes.Invoke(new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.GetNodes(ctx, \u0026konnect.GetNodesArgs{\n\t\t\tControlPlaneId: controlPlane.Id,\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.inputs.GetNodesArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        final var example = KonnectFunctions.getNodes(GetNodesArgs.builder()\n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n  example:\n    fn::invoke:\n      Function: konnect:getNodes\n      Arguments:\n        controlPlaneId: ${controlPlane.id}\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getNodes.\n",
+                "properties": {
+                    "controlPlaneId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the parent control plane.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "controlPlaneId"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getNodes.\n",
+                "properties": {
+                    "controlPlaneId": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "nodes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/konnect:index/getNodesNode:getNodesNode"
+                        },
+                        "description": "**(set{node})** Set of nodes belonging to control plane\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "controlPlaneId",
+                    "nodes",
+                    "id"
+                ]
+            }
+        },
+        "konnect:index/getRole:getRole": {
+            "description": "Represents a role\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst example = konnect.getRole({\n    displayName: \"Admin\",\n    entityTypeDisplayName: \"Control Planes\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nexample = konnect.get_role(display_name=\"Admin\",\n    entity_type_display_name=\"Control Planes\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = Konnect.GetRole.Invoke(new()\n    {\n        DisplayName = \"Admin\",\n        EntityTypeDisplayName = \"Control Planes\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := konnect.GetRole(ctx, \u0026konnect.GetRoleArgs{\n\t\t\tDisplayName:           \"Admin\",\n\t\t\tEntityTypeDisplayName: \"Control Planes\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetRoleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var example = KonnectFunctions.getRole(GetRoleArgs.builder()\n            .displayName(\"Admin\")\n            .entityTypeDisplayName(\"Control Planes\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  example:\n    fn::invoke:\n      Function: konnect:getRole\n      Arguments:\n        displayName: Admin\n        entityTypeDisplayName: Control Planes\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getRole.\n",
+                "properties": {
+                    "displayName": {
+                        "type": "string",
+                        "description": "**(Required, String)** The display name of the Role. Uses equality.\n"
+                    },
+                    "entityTypeDisplayName": {
+                        "type": "string",
+                        "description": "**(Required, String)** The display name of the role entity type. Must be `Control Planes` or `Services`\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "displayName",
+                    "entityTypeDisplayName"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getRole.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "**(String)** The description of the role.\n"
+                    },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "entityTypeDisplayName": {
+                        "type": "string"
+                    },
+                    "entityTypeName": {
+                        "type": "string",
+                        "description": "**(String)** The name of the role entity type.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "**(String)** The name of the role.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "description",
+                    "displayName",
+                    "entityTypeDisplayName",
+                    "entityTypeName",
+                    "name",
+                    "id"
+                ]
+            }
+        },
+        "konnect:index/getTeam:getTeam": {
+            "description": "Represents a team\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst example = konnect.getTeam({\n    searchName: \"Panther\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nexample = konnect.get_team(search_name=\"Panther\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = Konnect.GetTeam.Invoke(new()\n    {\n        SearchName = \"Panther\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := konnect.LookupTeam(ctx, \u0026konnect.LookupTeamArgs{\n\t\t\tSearchName: pulumi.StringRef(\"Panther\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetTeamArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var example = KonnectFunctions.getTeam(GetTeamArgs.builder()\n            .searchName(\"Panther\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  example:\n    fn::invoke:\n      Function: konnect:getTeam\n      Arguments:\n        searchName: Panther\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getTeam.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the name of the team. Uses equality.\n"
+                    },
+                    "searchName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the name of the team. Uses contains.\n"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getTeam.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "**(String)** The description of the team.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "isPredefined": {
+                        "type": "boolean",
+                        "description": "**(Boolean)** Whether the team is predefined.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "searchName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "description",
+                    "isPredefined",
+                    "id"
+                ]
+            }
+        },
+        "konnect:index/getTeamRole:getTeamRole": {
+            "description": "Represents a role assigned to a team\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst team = konnect.getTeam({\n    name: \"runtime-admin\",\n});\nconst example = team.then(team =\u003e konnect.getTeamRole({\n    teamId: team.id,\n    entityTypeDisplayName: \"Control Planes\",\n}));\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nteam = konnect.get_team(name=\"runtime-admin\")\nexample = konnect.get_team_role(team_id=team.id,\n    entity_type_display_name=\"Control Planes\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var team = Konnect.GetTeam.Invoke(new()\n    {\n        Name = \"runtime-admin\",\n    });\n\n    var example = Konnect.GetTeamRole.Invoke(new()\n    {\n        TeamId = team.Apply(getTeamResult =\u003e getTeamResult.Id),\n        EntityTypeDisplayName = \"Control Planes\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tteam, err := konnect.LookupTeam(ctx, \u0026konnect.LookupTeamArgs{\n\t\t\tName: pulumi.StringRef(\"runtime-admin\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.LookupTeamRole(ctx, \u0026konnect.LookupTeamRoleArgs{\n\t\t\tTeamId:                team.Id,\n\t\t\tEntityTypeDisplayName: pulumi.StringRef(\"Control Planes\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetTeamArgs;\nimport com.pulumi.konnect.inputs.GetTeamRoleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var team = KonnectFunctions.getTeam(GetTeamArgs.builder()\n            .name(\"runtime-admin\")\n            .build());\n\n        final var example = KonnectFunctions.getTeamRole(GetTeamRoleArgs.builder()\n            .teamId(team.applyValue(getTeamResult -\u003e getTeamResult.id()))\n            .entityTypeDisplayName(\"Control Planes\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  team:\n    fn::invoke:\n      Function: konnect:getTeam\n      Arguments:\n        name: runtime-admin\n  example:\n    fn::invoke:\n      Function: konnect:getTeamRole\n      Arguments:\n        teamId: ${team.id}\n        entityTypeDisplayName: Control Planes\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getTeamRole.\n",
+                "properties": {
+                    "entityTypeDisplayName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the display name of the entity type. Must be `Control Planes` or `Services`. Uses equality.\n"
+                    },
+                    "roleDisplayName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the display name of the role. Uses equality.\n"
+                    },
+                    "searchEntityTypeDisplayName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the display name of the entity type, like `Control Planes` or `Services`. Uses contains.\n"
+                    },
+                    "searchRoleDisplayName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the display name of the role. Uses contains.\n"
+                    },
+                    "teamId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the team assigned the role\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "teamId"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getTeamRole.\n",
+                "properties": {
+                    "entityId": {
+                        "type": "string",
+                        "description": "**(String)** The id of the entity for which the role applies.\n"
+                    },
+                    "entityRegion": {
+                        "type": "string",
+                        "description": "**(String)** The region of the entity for which the role applies.\n"
+                    },
+                    "entityTypeDisplayName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "roleDisplayName": {
+                        "type": "string"
+                    },
+                    "searchEntityTypeDisplayName": {
+                        "type": "string"
+                    },
+                    "searchRoleDisplayName": {
+                        "type": "string"
+                    },
+                    "teamId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "entityId",
+                    "entityRegion",
+                    "teamId",
+                    "id"
+                ]
+            }
+        },
+        "konnect:index/getUser:getUser": {
+            "description": "Represents a user\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst example = konnect.getUser({\n    searchEmail: \"@example.com\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nexample = konnect.get_user(search_email=\"@example.com\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = Konnect.GetUser.Invoke(new()\n    {\n        SearchEmail = \"@example.com\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := konnect.LookupUser(ctx, \u0026konnect.LookupUserArgs{\n\t\t\tSearchEmail: pulumi.StringRef(\"@example.com\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetUserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var example = KonnectFunctions.getUser(GetUserArgs.builder()\n            .searchEmail(\"@example.com\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  example:\n    fn::invoke:\n      Function: konnect:getUser\n      Arguments:\n        searchEmail: '@example.com'\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getUser.\n",
+                "properties": {
+                    "active": {
+                        "type": "boolean",
+                        "description": "**(Optional, Boolean)** The filter flag to apply to the active flag of the user. Uses equality. Default: `true`\n"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the email of the user. Uses equality.\n"
+                    },
+                    "fullName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the full name of the user. Uses equality.\n"
+                    },
+                    "searchEmail": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the email of the user. Uses contains.\n"
+                    },
+                    "searchFullName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the full name of the user. Uses contains.\n"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getUser.\n",
+                "properties": {
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "preferredName": {
+                        "type": "string",
+                        "description": "**(String)** The preferred name of the user.\n"
+                    },
+                    "searchEmail": {
+                        "type": "string"
+                    },
+                    "searchFullName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "preferredName",
+                    "id"
+                ]
+            }
+        },
+        "konnect:index/getUserRole:getUserRole": {
+            "description": "Represents a role assigned to a user\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst user = konnect.getUser({\n    searchFullName: \"Joe\",\n});\nconst example = user.then(user =\u003e konnect.getUserRole({\n    userId: user.id,\n    entityTypeDisplayName: \"Control Planes\",\n}));\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\nuser = konnect.get_user(search_full_name=\"Joe\")\nexample = konnect.get_user_role(user_id=user.id,\n    entity_type_display_name=\"Control Planes\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var user = Konnect.GetUser.Invoke(new()\n    {\n        SearchFullName = \"Joe\",\n    });\n\n    var example = Konnect.GetUserRole.Invoke(new()\n    {\n        UserId = user.Apply(getUserResult =\u003e getUserResult.Id),\n        EntityTypeDisplayName = \"Control Planes\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist123/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tuser, err := konnect.LookupUser(ctx, \u0026konnect.LookupUserArgs{\n\t\t\tSearchFullName: pulumi.StringRef(\"Joe\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.LookupUserRole(ctx, \u0026konnect.LookupUserRoleArgs{\n\t\t\tUserId:                user.Id,\n\t\t\tEntityTypeDisplayName: pulumi.StringRef(\"Control Planes\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetUserArgs;\nimport com.pulumi.konnect.inputs.GetUserRoleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var user = KonnectFunctions.getUser(GetUserArgs.builder()\n            .searchFullName(\"Joe\")\n            .build());\n\n        final var example = KonnectFunctions.getUserRole(GetUserRoleArgs.builder()\n            .userId(user.applyValue(getUserResult -\u003e getUserResult.id()))\n            .entityTypeDisplayName(\"Control Planes\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  user:\n    fn::invoke:\n      Function: konnect:getUser\n      Arguments:\n        searchFullName: Joe\n  example:\n    fn::invoke:\n      Function: konnect:getUserRole\n      Arguments:\n        userId: ${user.id}\n        entityTypeDisplayName: Control Planes\n```\n{{% /example %}}\n{{% /examples %}}",
+            "inputs": {
+                "description": "A collection of arguments for invoking getUserRole.\n",
+                "properties": {
+                    "entityTypeDisplayName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the display name of the entity type. Must be `Control Planes` or `Services`. Uses equality.\n"
+                    },
+                    "roleDisplayName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The filter string to apply to the display name of the role. Uses equality.\n"
+                    },
+                    "searchEntityTypeDisplayName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the display name of the entity type, like `Control Planes` or `Services`. Uses contains.\n"
+                    },
+                    "searchRoleDisplayName": {
+                        "type": "string",
+                        "description": "**(Optional, String)** The search string to apply to the display name of the role. Uses contains.\n"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "description": "**(Required, String)** The id of the user assigned the role\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "userId"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getUserRole.\n",
+                "properties": {
+                    "entityId": {
+                        "type": "string",
+                        "description": "**(String)** The id of the entity for which the role applies.\n"
+                    },
+                    "entityRegion": {
+                        "type": "string",
+                        "description": "**(String)** The region of the entity for which the role applies.\n"
+                    },
+                    "entityTypeDisplayName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "roleDisplayName": {
+                        "type": "string"
+                    },
+                    "searchEntityTypeDisplayName": {
+                        "type": "string"
+                    },
+                    "searchRoleDisplayName": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "entityId",
+                    "entityRegion",
+                    "userId",
+                    "id"
+                ]
+            }
+        }
+    }
+}

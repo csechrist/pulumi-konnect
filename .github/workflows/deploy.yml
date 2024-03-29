@@ -1,0 +1,17 @@
+name: deploy
+
+on:
+  workflow_call:
+    inputs: {}
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - uses: pulumi/pulumi-package-publisher@main
+              with:
+                sdk: nodejs
+              

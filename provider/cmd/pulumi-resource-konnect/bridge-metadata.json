@@ -1,0 +1,338 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "konnect_authentication_settings": {
+                "current": "konnect:index/authenticationSettings:AuthenticationSettings"
+            },
+            "konnect_consumer": {
+                "current": "konnect:index/consumer:Consumer"
+            },
+            "konnect_consumer_acl": {
+                "current": "konnect:index/consumerACL:ConsumerACL"
+            },
+            "konnect_consumer_basic": {
+                "current": "konnect:index/consumerBasic:ConsumerBasic"
+            },
+            "konnect_consumer_hmac": {
+                "current": "konnect:index/consumerHMAC:ConsumerHMAC"
+            },
+            "konnect_consumer_jwt": {
+                "current": "konnect:index/consumerJWT:ConsumerJWT"
+            },
+            "konnect_consumer_key": {
+                "current": "konnect:index/consumerKey:ConsumerKey"
+            },
+            "konnect_control_plane": {
+                "current": "konnect:index/controlPlane:ControlPlane"
+            },
+            "konnect_identity_provider": {
+                "current": "konnect:index/identityProvider:IdentityProvider",
+                "fields": {
+                    "scopes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "konnect_plugin": {
+                "current": "konnect:index/plugin:Plugin",
+                "fields": {
+                    "protocols": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "konnect_route": {
+                "current": "konnect:index/route:Route",
+                "fields": {
+                    "header": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "values": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "hosts": {
+                        "maxItemsOne": false
+                    },
+                    "methods": {
+                        "maxItemsOne": false
+                    },
+                    "paths": {
+                        "maxItemsOne": false
+                    },
+                    "protocols": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "konnect_service": {
+                "current": "konnect:index/service:Service"
+            },
+            "konnect_team": {
+                "current": "konnect:index/team:Team"
+            },
+            "konnect_team_mappings": {
+                "current": "konnect:index/teamMappings:TeamMappings",
+                "fields": {
+                    "mapping": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "team_ids": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "konnect_team_role": {
+                "current": "konnect:index/teamRole:TeamRole"
+            },
+            "konnect_team_user": {
+                "current": "konnect:index/teamUser:TeamUser"
+            },
+            "konnect_user": {
+                "current": "konnect:index/user:User"
+            },
+            "konnect_user_role": {
+                "current": "konnect:index/userRole:UserRole"
+            }
+        },
+        "datasources": {
+            "konnect_consumer": {
+                "current": "konnect:index/getConsumer:getConsumer"
+            },
+            "konnect_control_plane": {
+                "current": "konnect:index/getControlPlane:getControlPlane"
+            },
+            "konnect_nodes": {
+                "current": "konnect:index/getNodes:getNodes",
+                "fields": {
+                    "nodes": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "konnect_role": {
+                "current": "konnect:index/getRole:getRole"
+            },
+            "konnect_team": {
+                "current": "konnect:index/getTeam:getTeam"
+            },
+            "konnect_team_role": {
+                "current": "konnect:index/getTeamRole:getTeamRole"
+            },
+            "konnect_user": {
+                "current": "konnect:index/getUser:getUser"
+            },
+            "konnect_user_role": {
+                "current": "konnect:index/getUserRole:getUserRole"
+            }
+        }
+    },
+    "auto-settings": {},
+    "renames": {
+        "resources": {
+            "konnect:index/authenticationSettings:AuthenticationSettings": "konnect_authentication_settings",
+            "konnect:index/consumer:Consumer": "konnect_consumer",
+            "konnect:index/consumerACL:ConsumerACL": "konnect_consumer_acl",
+            "konnect:index/consumerBasic:ConsumerBasic": "konnect_consumer_basic",
+            "konnect:index/consumerHMAC:ConsumerHMAC": "konnect_consumer_hmac",
+            "konnect:index/consumerJWT:ConsumerJWT": "konnect_consumer_jwt",
+            "konnect:index/consumerKey:ConsumerKey": "konnect_consumer_key",
+            "konnect:index/controlPlane:ControlPlane": "konnect_control_plane",
+            "konnect:index/identityProvider:IdentityProvider": "konnect_identity_provider",
+            "konnect:index/plugin:Plugin": "konnect_plugin",
+            "konnect:index/route:Route": "konnect_route",
+            "konnect:index/service:Service": "konnect_service",
+            "konnect:index/team:Team": "konnect_team",
+            "konnect:index/teamMappings:TeamMappings": "konnect_team_mappings",
+            "konnect:index/teamRole:TeamRole": "konnect_team_role",
+            "konnect:index/teamUser:TeamUser": "konnect_team_user",
+            "konnect:index/user:User": "konnect_user",
+            "konnect:index/userRole:UserRole": "konnect_user_role"
+        },
+        "functions": {
+            "konnect:index/getConsumer:getConsumer": "konnect_consumer",
+            "konnect:index/getControlPlane:getControlPlane": "konnect_control_plane",
+            "konnect:index/getNodes:getNodes": "konnect_nodes",
+            "konnect:index/getRole:getRole": "konnect_role",
+            "konnect:index/getTeam:getTeam": "konnect_team",
+            "konnect:index/getTeamRole:getTeamRole": "konnect_team_role",
+            "konnect:index/getUser:getUser": "konnect_user",
+            "konnect:index/getUserRole:getUserRole": "konnect_user_role"
+        },
+        "renamedProperties": {
+            "konnect:index/TeamMappingsMapping:TeamMappingsMapping": {
+                "teamIds": "team_ids"
+            },
+            "konnect:index/authenticationSettings:AuthenticationSettings": {
+                "basicAuthEnabled": "basic_auth_enabled",
+                "idpMappingEnabled": "idp_mapping_enabled",
+                "konnectMappingEnabled": "konnect_mapping_enabled",
+                "oidcAuthEnabled": "oidc_auth_enabled"
+            },
+            "konnect:index/consumer:Consumer": {
+                "consumerId": "consumer_id",
+                "controlPlaneId": "control_plane_id",
+                "customId": "custom_id"
+            },
+            "konnect:index/consumerACL:ConsumerACL": {
+                "aclId": "acl_id",
+                "consumerId": "consumer_id",
+                "controlPlaneId": "control_plane_id"
+            },
+            "konnect:index/consumerBasic:ConsumerBasic": {
+                "basicId": "basic_id",
+                "consumerId": "consumer_id",
+                "controlPlaneId": "control_plane_id",
+                "passwordHash": "password_hash"
+            },
+            "konnect:index/consumerHMAC:ConsumerHMAC": {
+                "consumerId": "consumer_id",
+                "controlPlaneId": "control_plane_id",
+                "hmacId": "hmac_id"
+            },
+            "konnect:index/consumerJWT:ConsumerJWT": {
+                "consumerId": "consumer_id",
+                "controlPlaneId": "control_plane_id",
+                "jwtId": "jwt_id",
+                "rsaPublicKey": "rsa_public_key"
+            },
+            "konnect:index/consumerKey:ConsumerKey": {
+                "consumerId": "consumer_id",
+                "controlPlaneId": "control_plane_id",
+                "keyId": "key_id"
+            },
+            "konnect:index/controlPlane:ControlPlane": {
+                "clusterType": "cluster_type",
+                "controlPlaneEndpoint": "control_plane_endpoint",
+                "telemetryEndpoint": "telemetry_endpoint"
+            },
+            "konnect:index/getConsumer:getConsumer": {
+                "consumerId": "consumer_id",
+                "controlPlaneId": "control_plane_id",
+                "customId": "custom_id",
+                "searchCustomId": "search_custom_id",
+                "searchUsername": "search_username"
+            },
+            "konnect:index/getControlPlane:getControlPlane": {
+                "clusterType": "cluster_type",
+                "controlPlaneEndpoint": "control_plane_endpoint",
+                "searchName": "search_name",
+                "telemetryEndpoint": "telemetry_endpoint"
+            },
+            "konnect:index/getNodes:getNodes": {
+                "controlPlaneId": "control_plane_id"
+            },
+            "konnect:index/getNodesNode:getNodesNode": {
+                "configHash": "config_hash",
+                "dataPlaneCertId": "data_plane_cert_id",
+                "lastPing": "last_ping"
+            },
+            "konnect:index/getRole:getRole": {
+                "displayName": "display_name",
+                "entityTypeDisplayName": "entity_type_display_name",
+                "entityTypeName": "entity_type_name"
+            },
+            "konnect:index/getTeam:getTeam": {
+                "isPredefined": "is_predefined",
+                "searchName": "search_name"
+            },
+            "konnect:index/getTeamRole:getTeamRole": {
+                "entityId": "entity_id",
+                "entityRegion": "entity_region",
+                "entityTypeDisplayName": "entity_type_display_name",
+                "roleDisplayName": "role_display_name",
+                "searchEntityTypeDisplayName": "search_entity_type_display_name",
+                "searchRoleDisplayName": "search_role_display_name",
+                "teamId": "team_id"
+            },
+            "konnect:index/getUser:getUser": {
+                "fullName": "full_name",
+                "preferredName": "preferred_name",
+                "searchEmail": "search_email",
+                "searchFullName": "search_full_name"
+            },
+            "konnect:index/getUserRole:getUserRole": {
+                "entityId": "entity_id",
+                "entityRegion": "entity_region",
+                "entityTypeDisplayName": "entity_type_display_name",
+                "roleDisplayName": "role_display_name",
+                "searchEntityTypeDisplayName": "search_entity_type_display_name",
+                "searchRoleDisplayName": "search_role_display_name",
+                "userId": "user_id"
+            },
+            "konnect:index/identityProvider:IdentityProvider": {
+                "clientId": "client_id",
+                "clientSecret": "client_secret",
+                "emailClaimMapping": "email_claim_mapping",
+                "groupsClaimMapping": "groups_claim_mapping",
+                "loginPath": "login_path",
+                "nameClaimMapping": "name_claim_mapping"
+            },
+            "konnect:index/plugin:Plugin": {
+                "configAllJson": "config_all_json",
+                "configJson": "config_json",
+                "consumerId": "consumer_id",
+                "controlPlaneId": "control_plane_id",
+                "instanceName": "instance_name",
+                "pluginId": "plugin_id",
+                "routeId": "route_id",
+                "serviceId": "service_id"
+            },
+            "konnect:index/route:Route": {
+                "controlPlaneId": "control_plane_id",
+                "headers": "header",
+                "httpsRedirectStatusCode": "https_redirect_status_code",
+                "pathHandling": "path_handling",
+                "preserveHost": "preserve_host",
+                "regexPriority": "regex_priority",
+                "requestBuffering": "request_buffering",
+                "responseBuffering": "response_buffering",
+                "routeId": "route_id",
+                "serviceId": "service_id",
+                "stripPath": "strip_path"
+            },
+            "konnect:index/service:Service": {
+                "connectTimeout": "connect_timeout",
+                "controlPlaneId": "control_plane_id",
+                "readTimeout": "read_timeout",
+                "serviceId": "service_id",
+                "writeTimeout": "write_timeout"
+            },
+            "konnect:index/team:Team": {
+                "isPredefined": "is_predefined"
+            },
+            "konnect:index/teamMappings:TeamMappings": {
+                "mappings": "mapping"
+            },
+            "konnect:index/teamRole:TeamRole": {
+                "entityId": "entity_id",
+                "entityRegion": "entity_region",
+                "entityTypeDisplayName": "entity_type_display_name",
+                "roleDisplayName": "role_display_name",
+                "teamId": "team_id"
+            },
+            "konnect:index/teamUser:TeamUser": {
+                "teamId": "team_id",
+                "userId": "user_id"
+            },
+            "konnect:index/user:User": {
+                "fullName": "full_name",
+                "preferredName": "preferred_name"
+            },
+            "konnect:index/userRole:UserRole": {
+                "entityId": "entity_id",
+                "entityRegion": "entity_region",
+                "entityTypeDisplayName": "entity_type_display_name",
+                "roleDisplayName": "role_display_name",
+                "userId": "user_id"
+            }
+        }
+    }
+}
