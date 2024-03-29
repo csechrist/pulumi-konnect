@@ -75,7 +75,12 @@
                 }
             },
             "konnect_service": {
-                "current": "konnect:index/service:Service"
+                "current": "konnect:index/service:Service",
+                "fields": {
+                    "ca_certificates": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "konnect_team": {
                 "current": "konnect:index/team:Team"
@@ -315,6 +320,7 @@
                 "stripPath": "strip_path"
             },
             "konnect:index/service:Service": {
+                "caCertificates": "ca_certificates",
                 "connectTimeout": "connect_timeout",
                 "controlPlaneId": "control_plane_id",
                 "readTimeout": "read_timeout",

@@ -54,6 +54,7 @@ export class Service extends pulumi.CustomResource {
         return obj['__pulumiType'] === Service.__pulumiType;
     }
 
+    public readonly caCertificates!: pulumi.Output<string[] | undefined>;
     /**
      * **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
      */
@@ -116,6 +117,7 @@ export class Service extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ServiceState | undefined;
+            resourceInputs["caCertificates"] = state ? state.caCertificates : undefined;
             resourceInputs["connectTimeout"] = state ? state.connectTimeout : undefined;
             resourceInputs["controlPlaneId"] = state ? state.controlPlaneId : undefined;
             resourceInputs["enabled"] = state ? state.enabled : undefined;
@@ -136,6 +138,7 @@ export class Service extends pulumi.CustomResource {
             if ((!args || args.host === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'host'");
             }
+            resourceInputs["caCertificates"] = args ? args.caCertificates : undefined;
             resourceInputs["connectTimeout"] = args ? args.connectTimeout : undefined;
             resourceInputs["controlPlaneId"] = args ? args.controlPlaneId : undefined;
             resourceInputs["enabled"] = args ? args.enabled : undefined;
@@ -158,6 +161,7 @@ export class Service extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Service resources.
  */
 export interface ServiceState {
+    caCertificates?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
      */
@@ -212,6 +216,7 @@ export interface ServiceState {
  * The set of arguments for constructing a Service resource.
  */
 export interface ServiceArgs {
+    caCertificates?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
      */

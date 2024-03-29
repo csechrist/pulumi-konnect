@@ -52,6 +52,7 @@ import (
 type Service struct {
 	pulumi.CustomResourceState
 
+	CaCertificates pulumi.StringArrayOutput `pulumi:"caCertificates"`
 	// **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
 	ConnectTimeout pulumi.IntPtrOutput `pulumi:"connectTimeout"`
 	// **(Required, String)** The id of the control plane.
@@ -114,6 +115,7 @@ func GetService(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Service resources.
 type serviceState struct {
+	CaCertificates []string `pulumi:"caCertificates"`
 	// **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
 	ConnectTimeout *int `pulumi:"connectTimeout"`
 	// **(Required, String)** The id of the control plane.
@@ -141,6 +143,7 @@ type serviceState struct {
 }
 
 type ServiceState struct {
+	CaCertificates pulumi.StringArrayInput
 	// **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
 	ConnectTimeout pulumi.IntPtrInput
 	// **(Required, String)** The id of the control plane.
@@ -172,6 +175,7 @@ func (ServiceState) ElementType() reflect.Type {
 }
 
 type serviceArgs struct {
+	CaCertificates []string `pulumi:"caCertificates"`
 	// **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
 	ConnectTimeout *int `pulumi:"connectTimeout"`
 	// **(Required, String)** The id of the control plane.
@@ -198,6 +202,7 @@ type serviceArgs struct {
 
 // The set of arguments for constructing a Service resource.
 type ServiceArgs struct {
+	CaCertificates pulumi.StringArrayInput
 	// **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
 	ConnectTimeout pulumi.IntPtrInput
 	// **(Required, String)** The id of the control plane.
@@ -307,6 +312,10 @@ func (o ServiceOutput) ToServiceOutput() ServiceOutput {
 
 func (o ServiceOutput) ToServiceOutputWithContext(ctx context.Context) ServiceOutput {
 	return o
+}
+
+func (o ServiceOutput) CaCertificates() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringArrayOutput { return v.CaCertificates }).(pulumi.StringArrayOutput)
 }
 
 // **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`

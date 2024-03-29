@@ -16,6 +16,7 @@ class ServiceArgs:
     def __init__(__self__, *,
                  control_plane_id: pulumi.Input[str],
                  host: pulumi.Input[str],
+                 ca_certificates: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  connect_timeout: Optional[pulumi.Input[int]] = None,
                  enabled: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -41,6 +42,8 @@ class ServiceArgs:
         """
         pulumi.set(__self__, "control_plane_id", control_plane_id)
         pulumi.set(__self__, "host", host)
+        if ca_certificates is not None:
+            pulumi.set(__self__, "ca_certificates", ca_certificates)
         if connect_timeout is not None:
             pulumi.set(__self__, "connect_timeout", connect_timeout)
         if enabled is not None:
@@ -83,6 +86,15 @@ class ServiceArgs:
     @host.setter
     def host(self, value: pulumi.Input[str]):
         pulumi.set(self, "host", value)
+
+    @property
+    @pulumi.getter(name="caCertificates")
+    def ca_certificates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "ca_certificates")
+
+    @ca_certificates.setter
+    def ca_certificates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "ca_certificates", value)
 
     @property
     @pulumi.getter(name="connectTimeout")
@@ -196,6 +208,7 @@ class ServiceArgs:
 @pulumi.input_type
 class _ServiceState:
     def __init__(__self__, *,
+                 ca_certificates: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  connect_timeout: Optional[pulumi.Input[int]] = None,
                  control_plane_id: Optional[pulumi.Input[str]] = None,
                  enabled: Optional[pulumi.Input[bool]] = None,
@@ -223,6 +236,8 @@ class _ServiceState:
         :param pulumi.Input[str] service_id: **(String)** Id of the service alone
         :param pulumi.Input[int] write_timeout: **(Optional, Integer)** The timeout in milliseconds between two successive write operations for transmitting a request to the host. Default: `60000`
         """
+        if ca_certificates is not None:
+            pulumi.set(__self__, "ca_certificates", ca_certificates)
         if connect_timeout is not None:
             pulumi.set(__self__, "connect_timeout", connect_timeout)
         if control_plane_id is not None:
@@ -247,6 +262,15 @@ class _ServiceState:
             pulumi.set(__self__, "service_id", service_id)
         if write_timeout is not None:
             pulumi.set(__self__, "write_timeout", write_timeout)
+
+    @property
+    @pulumi.getter(name="caCertificates")
+    def ca_certificates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        return pulumi.get(self, "ca_certificates")
+
+    @ca_certificates.setter
+    def ca_certificates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "ca_certificates", value)
 
     @property
     @pulumi.getter(name="connectTimeout")
@@ -398,6 +422,7 @@ class Service(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 ca_certificates: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  connect_timeout: Optional[pulumi.Input[int]] = None,
                  control_plane_id: Optional[pulumi.Input[str]] = None,
                  enabled: Optional[pulumi.Input[bool]] = None,
@@ -481,6 +506,7 @@ class Service(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 ca_certificates: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  connect_timeout: Optional[pulumi.Input[int]] = None,
                  control_plane_id: Optional[pulumi.Input[str]] = None,
                  enabled: Optional[pulumi.Input[bool]] = None,
@@ -501,6 +527,7 @@ class Service(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ServiceArgs.__new__(ServiceArgs)
 
+            __props__.__dict__["ca_certificates"] = ca_certificates
             __props__.__dict__["connect_timeout"] = connect_timeout
             if control_plane_id is None and not opts.urn:
                 raise TypeError("Missing required property 'control_plane_id'")
@@ -527,6 +554,7 @@ class Service(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            ca_certificates: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             connect_timeout: Optional[pulumi.Input[int]] = None,
             control_plane_id: Optional[pulumi.Input[str]] = None,
             enabled: Optional[pulumi.Input[bool]] = None,
@@ -563,6 +591,7 @@ class Service(pulumi.CustomResource):
 
         __props__ = _ServiceState.__new__(_ServiceState)
 
+        __props__.__dict__["ca_certificates"] = ca_certificates
         __props__.__dict__["connect_timeout"] = connect_timeout
         __props__.__dict__["control_plane_id"] = control_plane_id
         __props__.__dict__["enabled"] = enabled
@@ -576,6 +605,11 @@ class Service(pulumi.CustomResource):
         __props__.__dict__["service_id"] = service_id
         __props__.__dict__["write_timeout"] = write_timeout
         return Service(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="caCertificates")
+    def ca_certificates(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        return pulumi.get(self, "ca_certificates")
 
     @property
     @pulumi.getter(name="connectTimeout")

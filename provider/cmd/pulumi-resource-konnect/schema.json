@@ -866,10 +866,12 @@
             ],
             "inputProperties": {
                 "cert": {
-                    "type": "string"
+                    "type": "string",
+                    "willReplaceOnChanges": true
                 },
                 "controlPlaneId": {
-                    "type": "string"
+                    "type": "string",
+                    "willReplaceOnChanges": true
                 }
             },
             "requiredInputs": [
@@ -880,10 +882,12 @@
                 "description": "Input properties used for looking up and filtering DpCertificate resources.\n",
                 "properties": {
                     "cert": {
-                        "type": "string"
+                        "type": "string",
+                        "willReplaceOnChanges": true
                     },
                     "controlPlaneId": {
-                        "type": "string"
+                        "type": "string",
+                        "willReplaceOnChanges": true
                     }
                 },
                 "type": "object"
@@ -1422,6 +1426,12 @@
         "konnect:index/service:Service": {
             "description": "Represents a service within a control plane\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as konnect from \"@camsechrist/pulumi-konnect\";\nimport * as konnect from \"@pulumi/konnect\";\n\nconst controlPlane = konnect.getControlPlane({\n    name: \"TestControlPlane\",\n});\nconst example = new konnect.Service(\"example\", {\n    controlPlaneId: controlPlane.then(controlPlane =\u003e controlPlane.id),\n    host: \"mockbin.org\",\n});\n```\n```python\nimport pulumi\nimport pulumi_konnect as konnect\n\ncontrol_plane = konnect.get_control_plane(name=\"TestControlPlane\")\nexample = konnect.Service(\"example\",\n    control_plane_id=control_plane.id,\n    host=\"mockbin.org\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Konnect = Pulumi.Konnect;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var controlPlane = Konnect.GetControlPlane.Invoke(new()\n    {\n        Name = \"TestControlPlane\",\n    });\n\n    var example = new Konnect.Service(\"example\", new()\n    {\n        ControlPlaneId = controlPlane.Apply(getControlPlaneResult =\u003e getControlPlaneResult.Id),\n        Host = \"mockbin.org\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/csechrist/pulumi-konnect/sdk/go/konnect\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tcontrolPlane, err := konnect.LookupControlPlane(ctx, \u0026konnect.LookupControlPlaneArgs{\n\t\t\tName: pulumi.StringRef(\"TestControlPlane\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = konnect.NewService(ctx, \"example\", \u0026konnect.ServiceArgs{\n\t\t\tControlPlaneId: *pulumi.String(controlPlane.Id),\n\t\t\tHost:           pulumi.String(\"mockbin.org\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.konnect.KonnectFunctions;\nimport com.pulumi.konnect.inputs.GetControlPlaneArgs;\nimport com.pulumi.konnect.Service;\nimport com.pulumi.konnect.ServiceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var controlPlane = KonnectFunctions.getControlPlane(GetControlPlaneArgs.builder()\n            .name(\"TestControlPlane\")\n            .build());\n\n        var example = new Service(\"example\", ServiceArgs.builder()        \n            .controlPlaneId(controlPlane.applyValue(getControlPlaneResult -\u003e getControlPlaneResult.id()))\n            .host(\"mockbin.org\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: konnect:Service\n    properties:\n      controlPlaneId: ${controlPlane.id}\n      host: mockbin.org\nvariables:\n  controlPlane:\n    fn::invoke:\n      Function: konnect:getControlPlane\n      Arguments:\n        name: TestControlPlane\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nServices can be imported using a proper value of `id` as described above ",
             "properties": {
+                "caCertificates": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "connectTimeout": {
                     "type": "integer",
                     "description": "**(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`\n"
@@ -1478,6 +1488,12 @@
                 "serviceId"
             ],
             "inputProperties": {
+                "caCertificates": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "connectTimeout": {
                     "type": "integer",
                     "description": "**(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`\n"
@@ -1530,6 +1546,12 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Service resources.\n",
                 "properties": {
+                    "caCertificates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
                     "connectTimeout": {
                         "type": "integer",
                         "description": "**(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`\n"

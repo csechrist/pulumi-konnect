@@ -42,6 +42,9 @@ namespace Pulumi.Konnect
     [KonnectResourceType("konnect:index/service:Service")]
     public partial class Service : global::Pulumi.CustomResource
     {
+        [Output("caCertificates")]
+        public Output<ImmutableArray<string>> CaCertificates { get; private set; } = null!;
+
         /// <summary>
         /// **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
         /// </summary>
@@ -161,6 +164,14 @@ namespace Pulumi.Konnect
 
     public sealed class ServiceArgs : global::Pulumi.ResourceArgs
     {
+        [Input("caCertificates")]
+        private InputList<string>? _caCertificates;
+        public InputList<string> CaCertificates
+        {
+            get => _caCertificates ?? (_caCertificates = new InputList<string>());
+            set => _caCertificates = value;
+        }
+
         /// <summary>
         /// **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
         /// </summary>
@@ -235,6 +246,14 @@ namespace Pulumi.Konnect
 
     public sealed class ServiceState : global::Pulumi.ResourceArgs
     {
+        [Input("caCertificates")]
+        private InputList<string>? _caCertificates;
+        public InputList<string> CaCertificates
+        {
+            get => _caCertificates ?? (_caCertificates = new InputList<string>());
+            set => _caCertificates = value;
+        }
+
         /// <summary>
         /// **(Optional, Integer)** The timeout in milliseconds for establishing a connection to the host. Default: `60000`
         /// </summary>
