@@ -30,7 +30,7 @@ import (
 	// Replace this provider with the provider you are bridging.
 	konnect "github.com/scastria/terraform-provider-konnect/konnect"
 
-	"github.com/csechrist123/pulumi-konnect/provider/pkg/version"
+	"github.com/csechrist/pulumi-konnect/provider/pkg/version"
 )
 
 // all of the token components used below.
@@ -86,7 +86,7 @@ func Provider() tfbridge.ProviderInfo {
 		Keywords:   []string{"pulumi", "konnect", "category/cloud"},
 		License:    "Apache-2.0",
 		Homepage:   "https://www.pulumi.com",
-		Repository: "https://github.com/csechrist123/pulumi-konnect",
+		Repository: "https://github.com/csechrist/pulumi-konnect",
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
 		// should match the TF provider module's require directive, not any replace directives.
 		GitHubOrg:    "scastria",
@@ -149,7 +149,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: path.Join(
-				fmt.Sprintf("github.com/csechrist123/pulumi-%[1]s/sdk/", mainPkg),
+				fmt.Sprintf("github.com/csechrist/pulumi-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,

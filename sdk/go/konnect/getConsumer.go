@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/csechrist123/pulumi-konnect/sdk/go/konnect/internal"
+	"github.com/csechrist/pulumi-konnect/sdk/go/konnect/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -19,7 +19,7 @@ import (
 //
 // import (
 //
-//	"github.com/csechrist123/pulumi-konnect/sdk/go/konnect"
+//	"github.com/csechrist/pulumi-konnect/sdk/go/konnect"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )

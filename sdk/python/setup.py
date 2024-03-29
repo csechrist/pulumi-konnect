@@ -26,7 +26,7 @@ setup(name='pulumi_konnect',
       keywords='pulumi konnect category/cloud',
       url='https://www.pulumi.com',
       project_urls={
-          'Repository': 'https://github.com/csechrist123/pulumi-konnect'
+          'Repository': 'https://github.com/csechrist/pulumi-konnect'
       },
       license='Apache-2.0',
       packages=find_packages(),

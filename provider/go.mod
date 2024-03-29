@@ -1,4 +1,4 @@
-module github.com/csechrist123/pulumi-konnect/provider
+module github.com/csechrist/pulumi-konnect/provider
 
 go 1.22.1
 

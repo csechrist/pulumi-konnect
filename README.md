@@ -26,7 +26,7 @@ yarn add @camsechrist/pulumi-konnect
 To use from Go, use `go get` to grab the latest version of the library:
 
 ```bash
-go get github.com/csechrist123/pulumi-foo/sdk/go/...
+go get github.com/csechrist/pulumi-foo/sdk/go/...
 ```
 
 

@@ -15,8 +15,8 @@
 package main
 
 import (
-	konnect "github.com/csechrist123/pulumi-konnect/provider"
-	"github.com/csechrist123/pulumi-konnect/provider/pkg/version"
+	konnect "github.com/csechrist/pulumi-konnect/provider"
+	"github.com/csechrist/pulumi-konnect/provider/pkg/version"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
 )
 
