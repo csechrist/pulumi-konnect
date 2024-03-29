@@ -20,6 +20,10 @@ env:
   NUGET_FEED_URL: https://api.nuget.org/v3/index.json
   PUBLISH_NUGET: true
   PUBLISH_PYPI: false
+
+permissions:
+  contents: write
+  
 jobs:
   publish_binary:
     name: publish
@@ -42,7 +46,7 @@ jobs:
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v2
       with:
-        args: -p 3 release --rm-dist
+        args: -p 3 release --clean
         version: latest
     strategy:
       fail-fast: true
